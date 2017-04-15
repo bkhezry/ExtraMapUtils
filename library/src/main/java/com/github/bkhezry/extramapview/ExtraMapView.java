@@ -74,6 +74,5 @@ public class ExtraMapView extends MapView {
             }
         }
         boundMap();
-
     }
 }

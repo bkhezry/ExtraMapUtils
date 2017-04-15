@@ -29,14 +29,6 @@ public class DataGenerator {
         return extraMarkers;
     }
 
-    public static LatLng[] getPolygon() {
-        return latLngs_1;
-    }
-
-    public static LatLng[] getPolyline() {
-        return latLngs_1;
-    }
-
     public static LatLng[] getPolygon_1() {
         return latLngs_1;
     }
