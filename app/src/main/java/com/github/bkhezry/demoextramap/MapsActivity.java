@@ -41,9 +41,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         MapsInitializer.initialize(getApplicationContext());
-        map.getUiSettings().setMapToolbarEnabled(true);
-        map.getUiSettings().setCompassEnabled(true);
-        map.getUiSettings().setMyLocationButtonEnabled(true);
         final OptionView optionView =
                 new OptionViewBuilder()
                         .withCenterCoordinates(new LatLng(35.6892, 51.3890))
@@ -56,7 +53,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 DataGenerator.getPolyline_1(),
                                 DataGenerator.getPolyline_2()
                         )
-                        .withForceCenterMap(true)
+                        .withForceCenterMap(false)
                         .build();
         mMap.showExtraMap(optionView, map);
     }
