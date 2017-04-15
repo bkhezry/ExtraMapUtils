@@ -47,15 +47,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 new OptionViewBuilder()
                         .withCenterCoordinates(35.6892, 51.3890)
                         .withMarkers(DataGenerator.getListExtraMarker())
-                        .withIsMultipleMarker(false)
+                        .withIsMultipleMarker(true)
                         .withPolygon(DataGenerator.getPolygon())
                         .withIsSinglePolygon(false)
                         .withPolyline(DataGenerator.getPolyline())
                         .withIsSinglePolyline(false)
-                        .withPolygons(DataGenerator.getPolygons())
-                        .withIsMultiplePolygon(false)
-                        .withMultiplePolyline(DataGenerator.getPolylines())
-                        .withIsMultiplePolyline(true)
+                        .withPolygons(
+                                DataGenerator.getPolygon_1(),
+                                DataGenerator.getPolygon_2()
+                        )
+                        .withIsMultiplePolygon(true)
+                        .withPolylines(
+                                DataGenerator.getPolyline_1(),
+                                DataGenerator.getPolyline_2()
+                        )
+                        .withIsMultiplePolyline(false)
                         .build();
         mMap.showExtraMap(optionView, map);
     }

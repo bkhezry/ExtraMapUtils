@@ -2,6 +2,8 @@ package com.github.bkhezry.extramapview.model;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class OptionViewBuilder {
@@ -15,9 +17,9 @@ public class OptionViewBuilder {
     private boolean isSinglePolygon = false;
     private LatLng[] polyline;
     private boolean isSinglePolyline = false;
-    private List<LatLng[]> polygons;
+    private List<LatLng[]> polygons = new ArrayList<>();
     private boolean isMultiplePolygon = false;
-    private List<LatLng[]> polylines;
+    private List<LatLng[]> polylines = new ArrayList<>();
     private boolean isMultiplePolyline = false;
 
 
@@ -74,8 +76,8 @@ public class OptionViewBuilder {
         return this;
     }
 
-    public OptionViewBuilder withPolygons(List<LatLng[]> polygons) {
-        this.polygons = polygons;
+    public OptionViewBuilder withPolygons(LatLng[]... polygons) {
+        this.polygons.addAll(Arrays.asList(polygons));
         return this;
     }
 
@@ -85,8 +87,8 @@ public class OptionViewBuilder {
     }
 
 
-    public OptionViewBuilder withMultiplePolyline(List<LatLng[]> polylines) {
-        this.polylines = polylines;
+    public OptionViewBuilder withPolylines(LatLng[]... polylines) {
+        this.polylines.addAll(Arrays.asList(polylines));
         return this;
     }
 
@@ -96,7 +98,7 @@ public class OptionViewBuilder {
     }
 
     public OptionView build() {
-        return new OptionView(centerLatLng, isMultipleMarker, isSingleMarker, mapsZoom, markers, marker, isSinglePolygon, polygon, isSinglePolyline, polyline, isMultiplePolygon, polygons,isMultiplePolyline,polylines);
+        return new OptionView(centerLatLng, isMultipleMarker, isSingleMarker, mapsZoom, markers, marker, isSinglePolygon, polygon, isSinglePolyline, polyline, isMultiplePolygon, polygons, isMultiplePolyline, polylines);
     }
 
 
