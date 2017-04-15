@@ -57,39 +57,23 @@ public class ExtraMapView extends MapView {
 
     public void showExtraMap(final OptionView optionView, final GoogleMap googleMap) {
         this.googleMap = googleMap;
-        if (optionView.isSingleMarker()) {
-            googleMap.addMarker(new MarkerOptions().position(optionView.getMarker().getCenter()).title(optionView.getMarker().getName()));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(optionView.getCenterLatLng(), optionView.getMapsZoom()));
-        } else if (optionView.isMultipleMarker()) {
-            for (ExtraMarker extraMarker : optionView.getMarkers()) {
-                builder.include(extraMarker.getCenter());
-                googleMap.addMarker(new MarkerOptions().position(extraMarker.getCenter()).title(extraMarker.getName()));
+        for (ExtraMarker extraMarker : optionView.getMarkers()) {
+            builder.include(extraMarker.getCenter());
+            googleMap.addMarker(new MarkerOptions().position(extraMarker.getCenter()).title(extraMarker.getName()));
+        }
+        for (LatLng[] latLngs : optionView.getPolygons()) {
+            googleMap.addPolygon(new PolygonOptions().clickable(true).add(latLngs));
+            for (LatLng latLng : latLngs) {
+                builder.include(latLng);
             }
-            boundMap();
         }
-        if (optionView.isSinglePolygon()) {
-            googleMap.addPolygon(new PolygonOptions().clickable(true).add(optionView.getPolygon()));
-        }
-        if (optionView.isSinglePolyline()) {
-            googleMap.addPolyline(new PolylineOptions().clickable(true).add(optionView.getPolyline()));
-        }
-        if (optionView.isMultiplePolygon()) {
-            for (LatLng[] latLngs : optionView.getPolygons()) {
-                googleMap.addPolygon(new PolygonOptions().clickable(true).add(latLngs));
-                for (LatLng latLng : latLngs) {
-                    builder.include(latLng);
-                }
+        for (LatLng[] latLngs : optionView.getPolylines()) {
+            googleMap.addPolyline(new PolylineOptions().clickable(true).add(latLngs));
+            for (LatLng latLng : latLngs) {
+                builder.include(latLng);
             }
-            boundMap();
         }
-        if (optionView.isMultiplePolyline()) {
-            for (LatLng[] latLngs : optionView.getPolylines()) {
-                googleMap.addPolyline(new PolylineOptions().clickable(true).add(latLngs));
-                for (LatLng latLng : latLngs) {
-                    builder.include(latLng);
-                }
-            }
-            boundMap();
-        }
+        boundMap();
+
     }
 }

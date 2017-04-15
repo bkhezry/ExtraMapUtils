@@ -10,6 +10,7 @@ import com.github.bkhezry.demoextramap.utils.DataGenerator;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -45,23 +46,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         map.getUiSettings().setMyLocationButtonEnabled(true);
         final OptionView optionView =
                 new OptionViewBuilder()
-                        .withCenterCoordinates(35.6892, 51.3890)
+                        .withCenterCoordinates(new LatLng(35.6892, 51.3890))
                         .withMarkers(DataGenerator.getListExtraMarker())
-                        .withIsMultipleMarker(true)
-                        .withPolygon(DataGenerator.getPolygon())
-                        .withIsSinglePolygon(false)
-                        .withPolyline(DataGenerator.getPolyline())
-                        .withIsSinglePolyline(false)
                         .withPolygons(
                                 DataGenerator.getPolygon_1(),
                                 DataGenerator.getPolygon_2()
                         )
-                        .withIsMultiplePolygon(true)
                         .withPolylines(
                                 DataGenerator.getPolyline_1(),
                                 DataGenerator.getPolyline_2()
                         )
-                        .withIsMultiplePolyline(false)
                         .build();
         mMap.showExtraMap(optionView, map);
     }
