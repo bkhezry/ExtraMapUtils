@@ -73,6 +73,10 @@ public class ExtraMapView extends MapView {
                 builder.include(latLng);
             }
         }
-        boundMap();
+        if (optionView.isForceCenterMap()) {
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(optionView.getCenterLatLng(), optionView.getMapsZoom()));
+        } else {
+            boundMap();
+        }
     }
 }

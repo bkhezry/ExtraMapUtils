@@ -56,6 +56,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 DataGenerator.getPolyline_1(),
                                 DataGenerator.getPolyline_2()
                         )
+                        .withForceCenterMap(true)
                         .build();
         mMap.showExtraMap(optionView, map);
     }

@@ -9,6 +9,7 @@ import java.util.List;
 public class OptionViewBuilder {
     private LatLng centerLatLng;
     private float mapsZoom = 14;
+    private boolean forceCenterMap = false;
     private List<ExtraMarker> markers = new ArrayList<>();
     private List<LatLng[]> polygons = new ArrayList<>();
     private List<LatLng[]> polylines = new ArrayList<>();
@@ -45,9 +46,13 @@ public class OptionViewBuilder {
         return this;
     }
 
+    public OptionViewBuilder withForceCenterMap(boolean withForceCenterMap) {
+        this.forceCenterMap = withForceCenterMap;
+        return this;
+    }
 
     public OptionView build() {
-        return new OptionView(centerLatLng, mapsZoom, markers, polygons, polylines);
+        return new OptionView(centerLatLng, forceCenterMap, mapsZoom, markers, polygons, polylines);
     }
 
 
