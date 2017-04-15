@@ -11,8 +11,8 @@ public class OptionViewBuilder {
     private float mapsZoom = 14;
     private boolean forceCenterMap = false;
     private List<ExtraMarker> markers = new ArrayList<>();
-    private List<LatLng[]> polygons = new ArrayList<>();
-    private List<LatLng[]> polylines = new ArrayList<>();
+    private List<ExtraPolygon> polygons = new ArrayList<>();
+    private List<ExtraPolyline> polylines = new ArrayList<>();
 
     public OptionViewBuilder withCenterCoordinates(LatLng centerLatLng) {
         this.centerLatLng = centerLatLng;
@@ -35,13 +35,13 @@ public class OptionViewBuilder {
         return this;
     }
 
-    public OptionViewBuilder withPolygons(LatLng[]... polygons) {
+    public OptionViewBuilder withPolygons(ExtraPolygon... polygons) {
         this.polygons.addAll(Arrays.asList(polygons));
         return this;
     }
 
 
-    public OptionViewBuilder withPolylines(LatLng[]... polylines) {
+    public OptionViewBuilder withPolylines(ExtraPolyline... polylines) {
         this.polylines.addAll(Arrays.asList(polylines));
         return this;
     }

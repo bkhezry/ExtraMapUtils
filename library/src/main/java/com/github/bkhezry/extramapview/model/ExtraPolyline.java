@@ -13,4 +13,11 @@ public class ExtraPolyline extends UiOptions {
         setzIndex(zIndex);
     }
 
+    public LatLng[] getPoints() {
+        return points;
+    }
+
+    public void setPoints(LatLng[] points) {
+        this.points = points;
+    }
 }

@@ -5,6 +5,8 @@ import android.util.AttributeSet;
 import android.view.ViewTreeObserver;
 
 import com.github.bkhezry.extramapview.model.ExtraMarker;
+import com.github.bkhezry.extramapview.model.ExtraPolygon;
+import com.github.bkhezry.extramapview.model.ExtraPolyline;
 import com.github.bkhezry.extramapview.model.OptionView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -61,15 +63,15 @@ public class ExtraMapView extends MapView {
             builder.include(extraMarker.getCenter());
             googleMap.addMarker(new MarkerOptions().position(extraMarker.getCenter()).title(extraMarker.getName()));
         }
-        for (LatLng[] latLngs : optionView.getPolygons()) {
-            googleMap.addPolygon(new PolygonOptions().clickable(true).add(latLngs));
-            for (LatLng latLng : latLngs) {
+        for (ExtraPolygon polygon : optionView.getPolygons()) {
+            googleMap.addPolygon(new PolygonOptions().clickable(true).add(polygon.getPoints()));
+            for (LatLng latLng : polygon.getPoints()) {
                 builder.include(latLng);
             }
         }
-        for (LatLng[] latLngs : optionView.getPolylines()) {
-            googleMap.addPolyline(new PolylineOptions().clickable(true).add(latLngs));
-            for (LatLng latLng : latLngs) {
+        for (ExtraPolyline extraPolyline : optionView.getPolylines()) {
+            googleMap.addPolyline(new PolylineOptions().clickable(true).add(extraPolyline.getPoints()));
+            for (LatLng latLng : extraPolyline.getPoints()) {
                 builder.include(latLng);
             }
         }

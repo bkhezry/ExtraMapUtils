@@ -1,6 +1,12 @@
 package com.github.bkhezry.demoextramap.utils;
 
+import android.graphics.Color;
+
 import com.github.bkhezry.extramapview.model.ExtraMarker;
+import com.github.bkhezry.extramapview.model.ExtraPolygon;
+import com.github.bkhezry.extramapview.model.ExtraPolygonBuilder;
+import com.github.bkhezry.extramapview.model.ExtraPolyline;
+import com.github.bkhezry.extramapview.model.ExtraPolylineBuilder;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -29,19 +35,41 @@ public class DataGenerator {
         return extraMarkers;
     }
 
-    public static LatLng[] getPolygon_1() {
-        return latLngs_1;
+    public static ExtraPolygon getPolygon_1() {
+        return new ExtraPolygonBuilder()
+                .setPoints(latLngs_1)
+                .setzIndex(0)
+                .setStrokeWidth(10)
+                .setStrokeColor(Color.argb(10, 255, 255, 0))
+                .setFillColor(Color.argb(20, 200, 200, 200))
+                .build();
     }
 
-    public static LatLng[] getPolygon_2() {
-        return latLngs_2;
+    public static ExtraPolygon getPolygon_2() {
+        return new ExtraPolygonBuilder()
+                .setPoints(latLngs_2)
+                .setzIndex(0)
+                .setStrokeWidth(5)
+                .setStrokeColor(Color.argb(100, 50, 50, 0))
+                .setFillColor(Color.argb(200, 100, 100, 100))
+                .build();
     }
 
-    public static LatLng[] getPolyline_1() {
-        return latLngs_1;
+    public static ExtraPolyline getPolyline_1() {
+        return new ExtraPolylineBuilder()
+                .setPoints(latLngs_1)
+                .setzIndex(0)
+                .setStrokeWidth(5)
+                .setStrokeColor(Color.argb(100, 50, 50, 0))
+                .build();
     }
 
-    public static LatLng[] getPolyline_2() {
-        return latLngs_2;
+    public static ExtraPolyline getPolyline_2() {
+        return new ExtraPolylineBuilder()
+                .setPoints(latLngs_2)
+                .setzIndex(0)
+                .setStrokeWidth(10)
+                .setStrokeColor(Color.argb(10, 255, 255, 0))
+                .build();
     }
 }

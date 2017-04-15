@@ -10,11 +10,11 @@ public class OptionView {
     private boolean forceCenterMap;
     private float mapsZoom;
     private List<ExtraMarker> markers = new ArrayList<>();
-    private List<LatLng[]> polygons;
-    private List<LatLng[]> polylines;
+    private List<ExtraPolygon> polygons;
+    private List<ExtraPolyline> polylines;
 
 
-    public OptionView(LatLng centerCoordinates, boolean forceCenterMap, float mapsZoom, List<ExtraMarker> markers, List<LatLng[]> polygons, List<LatLng[]> polylines) {
+    public OptionView(LatLng centerCoordinates, boolean forceCenterMap, float mapsZoom, List<ExtraMarker> markers, List<ExtraPolygon> polygons, List<ExtraPolyline> polylines) {
         this.centerLatLng = centerCoordinates;
         this.forceCenterMap = forceCenterMap;
         this.mapsZoom = mapsZoom;
@@ -55,22 +55,20 @@ public class OptionView {
         this.markers = markers;
     }
 
-    public List<LatLng[]> getPolygons() {
+    public List<ExtraPolygon> getPolygons() {
         return polygons;
     }
 
-    public void setPolygons(List<LatLng[]> polygons) {
+    public void setPolygons(List<ExtraPolygon> polygons) {
         this.polygons = polygons;
     }
 
-
-    public List<LatLng[]> getPolylines() {
+    public List<ExtraPolyline> getPolylines() {
         return polylines;
     }
 
-    public void setPolylines(List<LatLng[]> polylines) {
+    public void setPolylines(List<ExtraPolyline> polylines) {
         this.polylines = polylines;
     }
-
 
 }
