@@ -36,7 +36,7 @@
 
         <activity
             android:name="com.github.bkhezry.demoextramapview.ui.MainActivity"
-            android:label="@string/title_activity_maps">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
