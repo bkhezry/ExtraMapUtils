@@ -35,7 +35,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name="com.github.bkhezry.demoextramapview.MainActivity"
+            android:name="com.github.bkhezry.demoextramapview.ui.MainActivity"
             android:label="@string/title_activity_maps">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

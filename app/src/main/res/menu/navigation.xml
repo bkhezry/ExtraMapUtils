@@ -2,15 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_basic"
+        android:icon="@drawable/ic_map_black_36dp"
         android:title="@string/title_basic" />
 
     <item
-        android:id="@+id/navigation_bookmark"
+        android:id="@+id/navigation_list"
+        android:icon="@drawable/ic_view_list_black_36dp"
         android:title="@string/title_recycleview" />
 
     <item
-        android:id="@+id/navigation_search"
+        android:id="@+id/navigation_about"
+        android:icon="@drawable/ic_info_black_36dp"
         android:title="@string/title_about" />
 
 </menu>
