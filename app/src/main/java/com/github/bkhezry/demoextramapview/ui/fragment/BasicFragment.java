@@ -1,46 +1,51 @@
-package com.github.bkhezry.demoextramapview;
+package com.github.bkhezry.demoextramapview.ui.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import com.github.bkhezry.extramapview.ExtraMapView;
-import com.github.bkhezry.extramapview.model.OptionView;
-import com.github.bkhezry.extramapview.builder.OptionViewBuilder;
+import com.github.bkhezry.demoextramapview.R;
 import com.github.bkhezry.demoextramapview.utils.DataGenerator;
+import com.github.bkhezry.extramapview.ExtraMapView;
+import com.github.bkhezry.extramapview.builder.OptionViewBuilder;
+import com.github.bkhezry.extramapview.model.OptionView;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+public class BasicFragment extends Fragment implements OnMapReadyCallback {
     private ExtraMapView mMap;
     private GoogleMap map;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        mMap = (ExtraMapView) findViewById(R.id.mapLite);
-        mMap.onCreate(savedInstanceState);
-        mMap.getMapAsync(this);
+
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_basic,
+                container, false);
+        mMap = (ExtraMapView) view.findViewById(R.id.mapLite);
+        mMap.onCreate(savedInstanceState);
+        mMap.getMapAsync(this);
+        return view;
+    }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+    public Fragment newInstance() {
+        return new BasicFragment();
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        MapsInitializer.initialize(getApplicationContext());
+        MapsInitializer.initialize(getActivity());
         final OptionView optionView =
                 new OptionViewBuilder()
                         .withCenterCoordinates(new LatLng(35.6892, 51.3890))

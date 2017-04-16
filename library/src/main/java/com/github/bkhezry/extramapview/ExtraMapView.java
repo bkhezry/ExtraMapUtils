@@ -2,7 +2,6 @@ package com.github.bkhezry.extramapview;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.ViewTreeObserver;
 
 import com.github.bkhezry.extramapview.model.ExtraMarker;
 import com.github.bkhezry.extramapview.model.ExtraPolygon;
@@ -46,16 +45,13 @@ public class ExtraMapView extends MapView {
     }
 
     private void boundMap() {
-        if (mapView.getViewTreeObserver().isAlive()) {
-            mapView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    LatLngBounds bounds = builder.build();
-                    mapView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100));
-                }
-            });
-        }
+        googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                LatLngBounds bounds = builder.build();
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100));
+            }
+        });
 
     }
 
