@@ -50,8 +50,8 @@ public class ExtraMapView extends MapView {
 
     }
 
-    public void showExtraMap(final OptionView optionView, final GoogleMap googleMap) {
-        this.googleMap = googleMap;
+    public void showExtraMap(final OptionView optionView) {
+        this.googleMap = optionView.getGoogleMap();
         for (ExtraMarker extraMarker : optionView.getMarkers()) {
             builder.include(extraMarker.getCenter());
             BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(extraMarker.getIcon());

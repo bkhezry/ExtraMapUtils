@@ -1,11 +1,13 @@
 package com.github.bkhezry.extramapview.model;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OptionView {
+    private GoogleMap googleMap;
     private LatLng centerLatLng;
     private boolean forceCenterMap;
     private float mapsZoom;
@@ -14,13 +16,22 @@ public class OptionView {
     private List<ExtraPolyline> polylines;
 
 
-    public OptionView(LatLng centerCoordinates, boolean forceCenterMap, float mapsZoom, List<ExtraMarker> markers, List<ExtraPolygon> polygons, List<ExtraPolyline> polylines) {
+    public OptionView(GoogleMap googleMap, LatLng centerCoordinates, boolean forceCenterMap, float mapsZoom, List<ExtraMarker> markers, List<ExtraPolygon> polygons, List<ExtraPolyline> polylines) {
+        this.googleMap = googleMap;
         this.centerLatLng = centerCoordinates;
         this.forceCenterMap = forceCenterMap;
         this.mapsZoom = mapsZoom;
         this.markers = markers;
         this.polygons = polygons;
         this.polylines = polylines;
+    }
+
+    public GoogleMap getGoogleMap() {
+        return googleMap;
+    }
+
+    public void setGoogleMap(GoogleMap googleMap) {
+        this.googleMap = googleMap;
     }
 
     public LatLng getCenterLatLng() {

@@ -2,51 +2,43 @@ package com.github.bkhezry.demoextramapview.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.bkhezry.demoextramapview.R;
+import com.github.bkhezry.demoextramapview.adapter.MapViewAdapter;
 import com.github.bkhezry.demoextramapview.utils.DataGenerator;
-import com.github.bkhezry.extramapview.ExtraMapView;
 import com.github.bkhezry.extramapview.builder.OptionViewBuilder;
 import com.github.bkhezry.extramapview.model.OptionView;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
 
-public class BasicFragment extends Fragment implements OnMapReadyCallback {
-    private ExtraMapView mMap;
-    private GoogleMap map;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
+public class RecycleViewFragment extends Fragment {
+    protected MapViewAdapter mListAdapter;
+    protected RecyclerView mRecyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_basic,
+        View view = inflater.inflate(R.layout.fragment_recycleview,
                 container, false);
-        mMap = (ExtraMapView) view.findViewById(R.id.mapLite);
-        mMap.onCreate(savedInstanceState);
-        mMap.getMapAsync(this);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.card_list);
+        int rows = 1;
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), rows, GridLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mListAdapter = createMapListAdapter();
+        mRecyclerView.setAdapter(mListAdapter);
+        mListAdapter.notifyDataSetChanged();
         return view;
     }
 
-    public Fragment newInstance() {
-        return new BasicFragment();
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        map = googleMap;
-        MapsInitializer.initialize(getActivity());
-        final OptionView optionView =
+    private MapViewAdapter createMapListAdapter() {
+        ArrayList<OptionView> optionViews = new ArrayList<>();
+        optionViews.add(
                 new OptionViewBuilder()
                         .withCenterCoordinates(new LatLng(35.6892, 51.3890))
                         .withMarkers(DataGenerator.getListExtraMarker())
@@ -59,8 +51,14 @@ public class BasicFragment extends Fragment implements OnMapReadyCallback {
                                 DataGenerator.getPolyline_2()
                         )
                         .withForceCenterMap(false)
-                        .withGoogleMap(googleMap)
-                        .build();
-        mMap.showExtraMap(optionView);
+                        .withGoogleMap(null)
+                        .build()
+        );
+
+        return new MapViewAdapter(optionViews);
+    }
+
+    public Fragment newInstance() {
+        return new RecycleViewFragment();
     }
 }

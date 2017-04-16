@@ -4,6 +4,7 @@ import com.github.bkhezry.extramapview.model.ExtraMarker;
 import com.github.bkhezry.extramapview.model.ExtraPolygon;
 import com.github.bkhezry.extramapview.model.ExtraPolyline;
 import com.github.bkhezry.extramapview.model.OptionView;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class OptionViewBuilder {
+    private GoogleMap googleMap;
     private LatLng centerLatLng;
     private float mapsZoom = 14;
     private boolean forceCenterMap = false;
@@ -55,8 +57,14 @@ public class OptionViewBuilder {
         return this;
     }
 
+    public OptionViewBuilder withGoogleMap(GoogleMap googleMap) {
+        this.googleMap = googleMap;
+        return this;
+    }
+
+
     public OptionView build() {
-        return new OptionView(centerLatLng, forceCenterMap, mapsZoom, markers, polygons, polylines);
+        return new OptionView(googleMap, centerLatLng, forceCenterMap, mapsZoom, markers, polygons, polylines);
     }
 
 

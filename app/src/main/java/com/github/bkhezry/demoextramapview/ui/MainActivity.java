@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.github.bkhezry.demoextramapview.R;
 import com.github.bkhezry.demoextramapview.ui.fragment.BasicFragment;
+import com.github.bkhezry.demoextramapview.ui.fragment.RecycleViewFragment;
 
 public class MainActivity extends AppCompatActivity {
     private Fragment mFragment = new BasicFragment().newInstance();
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
                     mFragment = new BasicFragment().newInstance();
                     break;
                 case R.id.navigation_list:
-
+                    mFragment = new RecycleViewFragment().newInstance();
                     break;
                 case R.id.navigation_about:
 
