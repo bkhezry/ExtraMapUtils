@@ -5,7 +5,13 @@ import com.google.android.gms.maps.model.LatLng;
 public class ExtraMarker {
     private String name;
     private LatLng center;
-    private Integer icon;
+    private int icon;
+
+    public ExtraMarker(String name, LatLng center, Integer icon) {
+        this.name = name;
+        this.icon = icon;
+        this.center = center;
+    }
 
     public String getName() {
         return name;
@@ -23,21 +29,11 @@ public class ExtraMarker {
         this.center = center;
     }
 
-    public Integer getIcon() {
+    public int getIcon() {
         return icon;
     }
 
-    public void setIcon(Integer icon) {
+    public void setIcon(int icon) {
         this.icon = icon;
-    }
-
-    @SuppressWarnings("unused")
-    public ExtraMarker() {
-    }
-
-    public ExtraMarker(String name, LatLng center, Integer icon) {
-        this.name = name;
-        this.icon = icon;
-        this.center = center;
     }
 }

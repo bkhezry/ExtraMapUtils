@@ -2,7 +2,9 @@ package com.github.bkhezry.demoextramap.utils;
 
 import android.graphics.Color;
 
+import com.github.bkhezry.demoextramap.R;
 import com.github.bkhezry.extramapview.model.ExtraMarker;
+import com.github.bkhezry.extramapview.model.ExtraMarkerBuilder;
 import com.github.bkhezry.extramapview.model.ExtraPolygon;
 import com.github.bkhezry.extramapview.model.ExtraPolygonBuilder;
 import com.github.bkhezry.extramapview.model.ExtraPolyline;
@@ -25,13 +27,29 @@ public class DataGenerator {
             new LatLng(35.723379, 51.388689),
             new LatLng(35.724067, 51.384462)
     };
+    private static String[] markerNames = {
+            "Marker_1",
+            "Marker_2",
+            "Marker_3",
+            "Marker_4"
+    };
+    private static int[] icons = {
+            R.drawable.ic_pin_drop_black_24dp,
+            R.drawable.ic_pin_drop_black_24dp,
+            R.drawable.ic_pin_drop_black_24dp,
+            R.drawable.ic_pin_drop_black_24dp
+    };
 
     public static List<ExtraMarker> getListExtraMarker() {
         List<ExtraMarker> extraMarkers = new ArrayList<>();
-        extraMarkers.add(new ExtraMarker("Marker_1", latLngs_1[0], 1));
-        extraMarkers.add(new ExtraMarker("Marker_2", latLngs_1[1], 1));
-        extraMarkers.add(new ExtraMarker("Marker_3", latLngs_1[2], 1));
-        extraMarkers.add(new ExtraMarker("Marker_4", latLngs_1[3], 1));
+        for (int i = 0; i < markerNames.length; i++) {
+            extraMarkers.add(
+                    new ExtraMarkerBuilder().setName(markerNames[i])
+                            .setCenter(latLngs_1[i])
+                            .setIcon(icons[i])
+                            .build()
+            );
+        }
         return extraMarkers;
     }
 

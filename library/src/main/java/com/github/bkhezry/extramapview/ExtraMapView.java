@@ -12,6 +12,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -61,7 +63,13 @@ public class ExtraMapView extends MapView {
         this.googleMap = googleMap;
         for (ExtraMarker extraMarker : optionView.getMarkers()) {
             builder.include(extraMarker.getCenter());
-            googleMap.addMarker(new MarkerOptions().position(extraMarker.getCenter()).title(extraMarker.getName()));
+            BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(extraMarker.getIcon());
+            googleMap.addMarker(
+                    new MarkerOptions()
+                            .icon(icon)
+                            .position(extraMarker.getCenter())
+                            .title(extraMarker.getName())
+            );
         }
         for (ExtraPolygon polygon : optionView.getPolygons()) {
             googleMap.addPolygon(
