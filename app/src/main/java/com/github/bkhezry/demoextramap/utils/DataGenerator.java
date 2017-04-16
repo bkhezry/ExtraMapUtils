@@ -4,11 +4,11 @@ import android.graphics.Color;
 
 import com.github.bkhezry.demoextramap.R;
 import com.github.bkhezry.extramapview.model.ExtraMarker;
-import com.github.bkhezry.extramapview.model.ExtraMarkerBuilder;
+import com.github.bkhezry.extramapview.builder.ExtraMarkerBuilder;
 import com.github.bkhezry.extramapview.model.ExtraPolygon;
-import com.github.bkhezry.extramapview.model.ExtraPolygonBuilder;
+import com.github.bkhezry.extramapview.builder.ExtraPolygonBuilder;
 import com.github.bkhezry.extramapview.model.ExtraPolyline;
-import com.github.bkhezry.extramapview.model.ExtraPolylineBuilder;
+import com.github.bkhezry.extramapview.builder.ExtraPolylineBuilder;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
