@@ -34,10 +34,10 @@ public class DataGenerator {
             "Marker_4"
     };
     private static int[] icons = {
-            R.drawable.ic_pin_drop_black_24dp,
-            R.drawable.ic_pin_drop_black_24dp,
-            R.drawable.ic_pin_drop_black_24dp,
-            R.drawable.ic_pin_drop_black_24dp
+            R.drawable.ic_person_pin_circle_black_36dp,
+            R.drawable.ic_person_pin_circle_black_36dp,
+            R.drawable.ic_person_pin_circle_black_36dp,
+            R.drawable.ic_person_pin_circle_black_36dp
     };
 
     public static List<ExtraMarker> getListExtraMarker() {
@@ -58,8 +58,8 @@ public class DataGenerator {
                 .setPoints(latLngs_1)
                 .setzIndex(0)
                 .setStrokeWidth(10)
-                .setStrokeColor(Color.argb(10, 255, 255, 0))
-                .setFillColor(Color.argb(20, 200, 200, 200))
+                .setStrokeColor(Color.argb(100, 255, 255, 255))
+                .setFillColor(Color.argb(100, 200, 200, 200))
                 .build();
     }
 
