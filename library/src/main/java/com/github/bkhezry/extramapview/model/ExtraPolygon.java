@@ -10,8 +10,8 @@ public class ExtraPolygon extends UiOptions {
     public ExtraPolygon(LatLng[] points, int fillColor, int strokeColor, int strokeWidth, float zIndex) {
         this.points = points;
         this.fillColor = fillColor;
-        setStrokeColor(strokeColor);
-        setStrokeWidth(strokeWidth);
+        setColor(strokeColor);
+        setWidth(strokeWidth);
         setzIndex(zIndex);
     }
 

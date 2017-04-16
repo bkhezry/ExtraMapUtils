@@ -8,8 +8,8 @@ public class ExtraPolyline extends UiOptions {
 
     public ExtraPolyline(LatLng[] points, int strokeColor, int strokeWidth, float zIndex) {
         this.points = points;
-        setStrokeColor(strokeColor);
-        setStrokeWidth(strokeWidth);
+        setColor(strokeColor);
+        setWidth(strokeWidth);
         setzIndex(zIndex);
     }
 

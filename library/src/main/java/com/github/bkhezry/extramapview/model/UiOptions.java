@@ -1,24 +1,24 @@
 package com.github.bkhezry.extramapview.model;
 
 public class UiOptions {
-    private int strokeColor;
-    private int strokeWidth;
+    private int color;
+    private float width;
     private float zIndex;
 
-    public int getStrokeColor() {
-        return strokeColor;
+    public int getColor() {
+        return color;
     }
 
-    public void setStrokeColor(int strokeColor) {
-        this.strokeColor = strokeColor;
+    public void setColor(int color) {
+        this.color = color;
     }
 
-    public int getStrokeWidth() {
-        return strokeWidth;
+    public float getWidth() {
+        return width;
     }
 
-    public void setStrokeWidth(int strokeWidth) {
-        this.strokeWidth = strokeWidth;
+    public void setWidth(float width) {
+        this.width = width;
     }
 
     public float getzIndex() {

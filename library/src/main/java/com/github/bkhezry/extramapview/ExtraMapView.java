@@ -64,14 +64,27 @@ public class ExtraMapView extends MapView {
             googleMap.addMarker(new MarkerOptions().position(extraMarker.getCenter()).title(extraMarker.getName()));
         }
         for (ExtraPolygon polygon : optionView.getPolygons()) {
-            googleMap.addPolygon(new PolygonOptions().clickable(true).add(polygon.getPoints()));
+            googleMap.addPolygon(
+                    new PolygonOptions()
+                            .fillColor(polygon.getFillColor())
+                            .strokeColor(polygon.getColor())
+                            .strokeWidth(polygon.getWidth())
+                            .zIndex(polygon.getzIndex())
+                            .add(polygon.getPoints())
+            );
             for (LatLng latLng : polygon.getPoints()) {
                 builder.include(latLng);
             }
         }
-        for (ExtraPolyline extraPolyline : optionView.getPolylines()) {
-            googleMap.addPolyline(new PolylineOptions().clickable(true).add(extraPolyline.getPoints()));
-            for (LatLng latLng : extraPolyline.getPoints()) {
+        for (ExtraPolyline polyline : optionView.getPolylines()) {
+            googleMap.addPolyline(
+                    new PolylineOptions()
+                            .color(polyline.getColor())
+                            .width(polyline.getWidth())
+                            .zIndex(polyline.getzIndex())
+                            .add(polyline.getPoints())
+            );
+            for (LatLng latLng : polyline.getPoints()) {
                 builder.include(latLng);
             }
         }
