@@ -13,7 +13,7 @@ import com.github.bkhezry.demoextramapview.R;
 import com.github.bkhezry.demoextramapview.ui.fragment.BasicFragment;
 
 public class MainActivity extends AppCompatActivity {
-    private Fragment mFragment;
+    private Fragment mFragment = new BasicFragment().newInstance();
     private FragmentManager mFragmentManager;
     private BottomNavigationView navigation;
     public BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -31,14 +31,18 @@ public class MainActivity extends AppCompatActivity {
 
                     break;
             }
-            if (mFragment != null) {
-                mFragmentManager.beginTransaction()
-                        .replace(R.id.contentFrameLayout, mFragment).commit();
-            }
+            doTransaction();
             return true;
         }
 
     };
+
+    private void doTransaction() {
+        if (mFragment != null) {
+            mFragmentManager.beginTransaction()
+                    .replace(R.id.contentFrameLayout, mFragment).commit();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         mFragmentManager = getSupportFragmentManager();
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        doTransaction();
     }
 
 }
