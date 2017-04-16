@@ -53,6 +53,19 @@ public class DataGenerator {
         return extraMarkers;
     }
 
+    public static List<ExtraMarker> getListExtraMarker_2() {
+        List<ExtraMarker> extraMarkers = new ArrayList<>();
+        for (int i = 0; i < markerNames.length; i++) {
+            extraMarkers.add(
+                    new ExtraMarkerBuilder().setName(markerNames[i])
+                            .setCenter(latLngs_2[i])
+                            .setIcon(icons[i])
+                            .build()
+            );
+        }
+        return extraMarkers;
+    }
+
     public static ExtraPolygon getPolygon_1() {
         return new ExtraPolygonBuilder()
                 .setPoints(latLngs_1)

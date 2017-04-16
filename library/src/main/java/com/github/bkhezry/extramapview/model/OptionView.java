@@ -1,37 +1,28 @@
 package com.github.bkhezry.extramapview.model;
 
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OptionView {
-    private GoogleMap googleMap;
     private LatLng centerLatLng;
     private boolean forceCenterMap;
     private float mapsZoom;
     private List<ExtraMarker> markers = new ArrayList<>();
     private List<ExtraPolygon> polygons;
     private List<ExtraPolyline> polylines;
+    private boolean isListView;
 
 
-    public OptionView(GoogleMap googleMap, LatLng centerCoordinates, boolean forceCenterMap, float mapsZoom, List<ExtraMarker> markers, List<ExtraPolygon> polygons, List<ExtraPolyline> polylines) {
-        this.googleMap = googleMap;
+    public OptionView(LatLng centerCoordinates, boolean forceCenterMap, float mapsZoom, List<ExtraMarker> markers, List<ExtraPolygon> polygons, List<ExtraPolyline> polylines, boolean isListView) {
         this.centerLatLng = centerCoordinates;
         this.forceCenterMap = forceCenterMap;
         this.mapsZoom = mapsZoom;
         this.markers = markers;
         this.polygons = polygons;
         this.polylines = polylines;
-    }
-
-    public GoogleMap getGoogleMap() {
-        return googleMap;
-    }
-
-    public void setGoogleMap(GoogleMap googleMap) {
-        this.googleMap = googleMap;
+        this.isListView = isListView;
     }
 
     public LatLng getCenterLatLng() {
@@ -82,4 +73,11 @@ public class OptionView {
         this.polylines = polylines;
     }
 
+    public boolean isListView() {
+        return isListView;
+    }
+
+    public void setListView(boolean listView) {
+        isListView = listView;
+    }
 }

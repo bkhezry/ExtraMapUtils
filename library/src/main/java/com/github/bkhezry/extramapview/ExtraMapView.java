@@ -39,19 +39,22 @@ public class ExtraMapView extends MapView {
         super(context, googleMapOptions);
     }
 
-    private void boundMap() {
+    private void boundMap(final boolean isListView) {
         googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {
                 LatLngBounds bounds = builder.build();
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 50));
+                float zoom = googleMap.getCameraPosition().zoom;
+                if (isListView)
+                    googleMap.moveCamera(CameraUpdateFactory.zoomTo(zoom - 1f));
             }
         });
 
     }
 
-    public void showExtraMap(final OptionView optionView) {
-        this.googleMap = optionView.getGoogleMap();
+    public void showExtraMap(final OptionView optionView, GoogleMap googleMap) {
+        this.googleMap = googleMap;
         for (ExtraMarker extraMarker : optionView.getMarkers()) {
             builder.include(extraMarker.getCenter());
             BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(extraMarker.getIcon());
@@ -91,7 +94,7 @@ public class ExtraMapView extends MapView {
         if (optionView.isForceCenterMap()) {
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(optionView.getCenterLatLng(), optionView.getMapsZoom()));
         } else {
-            boundMap();
+            boundMap(optionView.isListView());
         }
     }
 }

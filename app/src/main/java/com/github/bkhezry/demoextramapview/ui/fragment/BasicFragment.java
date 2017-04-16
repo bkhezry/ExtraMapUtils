@@ -19,7 +19,6 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class BasicFragment extends Fragment implements OnMapReadyCallback {
     private ExtraMapView mMap;
-    private GoogleMap map;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,6 @@ public class BasicFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        map = googleMap;
         MapsInitializer.initialize(getActivity());
         final OptionView optionView =
                 new OptionViewBuilder()
@@ -59,8 +57,7 @@ public class BasicFragment extends Fragment implements OnMapReadyCallback {
                                 DataGenerator.getPolyline_2()
                         )
                         .withForceCenterMap(false)
-                        .withGoogleMap(googleMap)
                         .build();
-        mMap.showExtraMap(optionView);
+        mMap.showExtraMap(optionView, googleMap);
     }
 }
