@@ -1,4 +1,4 @@
-package com.github.bkhezry.demoextramap;
+package com.github.bkhezry.demoextramapview;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

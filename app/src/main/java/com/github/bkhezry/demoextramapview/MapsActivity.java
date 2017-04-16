@@ -1,4 +1,4 @@
-package com.github.bkhezry.demoextramap;
+package com.github.bkhezry.demoextramapview;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import com.github.bkhezry.extramapview.ExtraMapView;
 import com.github.bkhezry.extramapview.model.OptionView;
 import com.github.bkhezry.extramapview.builder.OptionViewBuilder;
-import com.github.bkhezry.demoextramap.utils.DataGenerator;
+import com.github.bkhezry.demoextramapview.utils.DataGenerator;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;

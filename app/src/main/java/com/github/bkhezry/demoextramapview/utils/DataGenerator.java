@@ -1,8 +1,8 @@
-package com.github.bkhezry.demoextramap.utils;
+package com.github.bkhezry.demoextramapview.utils;
 
 import android.graphics.Color;
 
-import com.github.bkhezry.demoextramap.R;
+import com.github.bkhezry.demoextramapview.R;
 import com.github.bkhezry.extramapview.model.ExtraMarker;
 import com.github.bkhezry.extramapview.builder.ExtraMarkerBuilder;
 import com.github.bkhezry.extramapview.model.ExtraPolygon;
