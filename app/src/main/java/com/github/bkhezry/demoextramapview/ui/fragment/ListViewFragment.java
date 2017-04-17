@@ -13,11 +13,11 @@ import android.widget.TextView;
 
 import com.github.bkhezry.demoextramapview.R;
 import com.github.bkhezry.demoextramapview.utils.AppUtils;
-import com.github.bkhezry.extramapview.ExtraMapView;
 import com.github.bkhezry.extramapview.Utils.MapsUtils;
 import com.github.bkhezry.extramapview.builder.OptionViewBuilder;
 import com.github.bkhezry.extramapview.model.OptionView;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
@@ -48,7 +48,7 @@ public class ListViewFragment extends Fragment {
 
     private class MapAdapter extends ArrayAdapter<OptionView> {
 
-        private final HashSet<ExtraMapView> mMaps = new HashSet<>();
+        private final HashSet<MapView> mMaps = new HashSet<>();
 
         public MapAdapter(Context context, OptionView[] optionViews) {
             super(context, R.layout.list_item, R.id.titleTextView, optionViews);
@@ -65,7 +65,7 @@ public class ListViewFragment extends Fragment {
                 row = getActivity().getLayoutInflater().inflate(R.layout.list_item, null);
 
                 holder = new ViewHolder();
-                holder.mapView = (ExtraMapView) row.findViewById(R.id.mapLite);
+                holder.mapView = (MapView) row.findViewById(R.id.mapLite);
                 holder.title = (TextView) row.findViewById(R.id.titleTextView);
 
                 row.setTag(holder);
@@ -90,7 +90,7 @@ public class ListViewFragment extends Fragment {
             return row;
         }
 
-        public HashSet<ExtraMapView> getMaps() {
+        public HashSet<MapView> getMaps() {
             return mMaps;
         }
     }
@@ -101,7 +101,7 @@ public class ListViewFragment extends Fragment {
 
     class ViewHolder implements OnMapReadyCallback {
 
-        ExtraMapView mapView;
+        MapView mapView;
 
         TextView title;
 

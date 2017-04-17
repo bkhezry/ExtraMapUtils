@@ -19,7 +19,7 @@
         card_view:cardElevation="25dp"
         card_view:contentPadding="25dp">
 
-        <com.github.bkhezry.extramapview.ExtraMapView
+        <com.google.android.gms.maps.MapView
             android:id="@+id/mapLite"
             android:name="com.google.android.gms.maps.MapFragment"
             android:layout_width="match_parent"

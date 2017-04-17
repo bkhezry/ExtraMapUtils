@@ -10,18 +10,18 @@ import android.view.ViewGroup;
 import com.github.bkhezry.demoextramapview.R;
 import com.github.bkhezry.demoextramapview.ui.MapsActivity;
 import com.github.bkhezry.demoextramapview.utils.AppUtils;
-import com.github.bkhezry.extramapview.ExtraMapView;
 import com.github.bkhezry.extramapview.Utils.MapsUtils;
 import com.github.bkhezry.extramapview.builder.OptionViewBuilder;
 import com.github.bkhezry.extramapview.model.OptionView;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 
 
 public class BasicFragment extends Fragment implements OnMapReadyCallback {
-    private ExtraMapView mMap;
+    private MapView mMap;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class BasicFragment extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_basic,
                 container, false);
-        mMap = (ExtraMapView) view.findViewById(R.id.mapLite);
+        mMap = (MapView) view.findViewById(R.id.mapLite);
         mMap.onCreate(savedInstanceState);
         mMap.getMapAsync(this);
         return view;
