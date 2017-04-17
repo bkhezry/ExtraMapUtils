@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.github.bkhezry.demoextramapview.R;
 import com.github.bkhezry.demoextramapview.utils.AppUtils;
 import com.github.bkhezry.extramapview.ExtraMapView;
+import com.github.bkhezry.extramapview.Utils.MapsUtils;
 import com.github.bkhezry.extramapview.builder.OptionViewBuilder;
 import com.github.bkhezry.extramapview.model.OptionView;
 import com.google.android.gms.maps.GoogleMap;
@@ -81,7 +82,7 @@ public class ListViewFragment extends Fragment {
             holder.mapView.setTag(optionView);
 
             if (holder.map != null) {
-                setMapLocation(holder.mapView, holder.map, optionView);
+                setMapLocation(optionView, holder.map);
             }
 
             //holder.title.setText(optionView.name);
@@ -94,8 +95,8 @@ public class ListViewFragment extends Fragment {
         }
     }
 
-    private static void setMapLocation(ExtraMapView mapView, GoogleMap map, OptionView optionView) {
-        mapView.showExtraMap(optionView, map);
+    private static void setMapLocation(OptionView optionView, GoogleMap googleMap) {
+        MapsUtils.showElements(optionView, googleMap);
     }
 
     class ViewHolder implements OnMapReadyCallback {
@@ -112,7 +113,7 @@ public class ListViewFragment extends Fragment {
             map = googleMap;
             OptionView optionView = (OptionView) mapView.getTag();
             if (optionView != null) {
-                setMapLocation(mapView, map, optionView);
+                setMapLocation(optionView, map);
             }
         }
 

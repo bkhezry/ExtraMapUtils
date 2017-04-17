@@ -11,6 +11,7 @@ import com.github.bkhezry.demoextramapview.R;
 import com.github.bkhezry.demoextramapview.ui.MapsActivity;
 import com.github.bkhezry.demoextramapview.utils.AppUtils;
 import com.github.bkhezry.extramapview.ExtraMapView;
+import com.github.bkhezry.extramapview.Utils.MapsUtils;
 import com.github.bkhezry.extramapview.builder.OptionViewBuilder;
 import com.github.bkhezry.extramapview.model.OptionView;
 import com.google.android.gms.maps.GoogleMap;
@@ -60,7 +61,7 @@ public class BasicFragment extends Fragment implements OnMapReadyCallback {
                         )
                         .withForceCenterMap(false)
                         .build();
-        mMap.showExtraMap(optionView, googleMap);
+        MapsUtils.showElements(optionView, googleMap);
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
