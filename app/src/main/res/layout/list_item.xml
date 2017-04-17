@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.github.bkhezry.extramaputils.widget.MapCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/tools"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView"
@@ -30,5 +30,5 @@
     </LinearLayout>
 
 
-</android.support.v7.widget.CardView>
+</com.github.bkhezry.extramaputils.widget.MapCardView>
 
