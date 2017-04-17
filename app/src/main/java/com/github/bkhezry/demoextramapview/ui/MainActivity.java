@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.github.bkhezry.demoextramapview.R;
+import com.github.bkhezry.demoextramapview.ui.fragment.AboutFragment;
 import com.github.bkhezry.demoextramapview.ui.fragment.BasicFragment;
 import com.github.bkhezry.demoextramapview.ui.fragment.ListViewFragment;
 
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                     mFragment = new ListViewFragment().newInstance();
                     break;
                 case R.id.navigation_about:
-
+                    mFragment = new AboutFragment().newInstance();
                     break;
             }
             doTransaction();

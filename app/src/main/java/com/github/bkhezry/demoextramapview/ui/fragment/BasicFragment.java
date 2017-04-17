@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.bkhezry.demoextramapview.R;
-import com.github.bkhezry.demoextramapview.utils.DataGenerator;
+import com.github.bkhezry.demoextramapview.utils.AppUtils;
 import com.github.bkhezry.extramapview.ExtraMapView;
 import com.github.bkhezry.extramapview.builder.OptionViewBuilder;
 import com.github.bkhezry.extramapview.model.OptionView;
@@ -47,14 +47,14 @@ public class BasicFragment extends Fragment implements OnMapReadyCallback {
         final OptionView optionView =
                 new OptionViewBuilder()
                         .withCenterCoordinates(new LatLng(35.6892, 51.3890))
-                        .withMarkers(DataGenerator.getListExtraMarker())
+                        .withMarkers(AppUtils.getListExtraMarker())
                         .withPolygons(
-                                DataGenerator.getPolygon_1(),
-                                DataGenerator.getPolygon_2()
+                                AppUtils.getPolygon_1(),
+                                AppUtils.getPolygon_2()
                         )
                         .withPolylines(
-                                DataGenerator.getPolyline_1(),
-                                DataGenerator.getPolyline_2()
+                                AppUtils.getPolyline_1(),
+                                AppUtils.getPolyline_2()
                         )
                         .withForceCenterMap(false)
                         .build();

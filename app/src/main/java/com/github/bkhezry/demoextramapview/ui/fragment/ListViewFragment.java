@@ -12,7 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.github.bkhezry.demoextramapview.R;
-import com.github.bkhezry.demoextramapview.utils.DataGenerator;
+import com.github.bkhezry.demoextramapview.utils.AppUtils;
 import com.github.bkhezry.extramapview.ExtraMapView;
 import com.github.bkhezry.extramapview.builder.OptionViewBuilder;
 import com.github.bkhezry.extramapview.model.OptionView;
@@ -141,7 +141,7 @@ public class ListViewFragment extends Fragment {
     private static OptionView[] LIST_OPTION_VIEW = {
             new OptionViewBuilder()
                     .withCenterCoordinates(new LatLng(35.6892, 51.3890))
-                    .withMarkers(DataGenerator.getListExtraMarker())
+                    .withMarkers(AppUtils.getListExtraMarker())
 //                    .withPolygons(
 //                            DataGenerator.getPolygon_1(),
 //                            DataGenerator.getPolygon_2()
@@ -155,7 +155,7 @@ public class ListViewFragment extends Fragment {
                     .build(),
             new OptionViewBuilder()
                     .withCenterCoordinates(new LatLng(35.6892, 51.3890))
-                    .withMarkers(DataGenerator.getListExtraMarker_2())
+                    .withMarkers(AppUtils.getListExtraMarker_2())
 //                    .withPolygons(
 //                            DataGenerator.getPolygon_1(),
 //                            DataGenerator.getPolygon_2()
