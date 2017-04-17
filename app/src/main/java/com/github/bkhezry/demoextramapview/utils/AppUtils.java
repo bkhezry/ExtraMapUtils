@@ -81,7 +81,7 @@ public class AppUtils {
                 .setPoints(latLngs_1)
                 .setzIndex(0)
                 .setStrokeWidth(10)
-                .setStrokeColor(Color.argb(100, 255, 255, 255))
+                .setStrokeColor(Color.BLACK)
                 .setFillColor(Color.argb(100, 200, 200, 200))
                 .build();
     }
@@ -91,7 +91,7 @@ public class AppUtils {
                 .setPoints(latLngs_2)
                 .setzIndex(0)
                 .setStrokeWidth(5)
-                .setStrokeColor(Color.argb(100, 50, 50, 0))
+                .setStrokeColor(Color.BLACK)
                 .setFillColor(Color.argb(200, 100, 100, 100))
                 .build();
     }
@@ -101,7 +101,7 @@ public class AppUtils {
                 .setPoints(latLngs_1)
                 .setzIndex(0)
                 .setStrokeWidth(5)
-                .setStrokeColor(Color.argb(100, 50, 50, 0))
+                .setStrokeColor(Color.BLACK)
                 .build();
     }
 
@@ -110,7 +110,7 @@ public class AppUtils {
                 .setPoints(latLngs_2)
                 .setzIndex(0)
                 .setStrokeWidth(10)
-                .setStrokeColor(Color.argb(10, 255, 255, 0))
+                .setStrokeColor(Color.BLACK)
                 .build();
     }
 

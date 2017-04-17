@@ -35,9 +35,9 @@ public class MapsUtils {
                     googleMap.addPolygon(
                             new PolygonOptions()
                                     .fillColor(polygon.getFillColor())
-                                    .strokeColor(polygon.getColor())
-                                    .strokeWidth(polygon.getWidth())
-                                    .zIndex(polygon.getzIndex())
+                                    .strokeColor(polygon.getUiOptions().getColor())
+                                    .strokeWidth(polygon.getUiOptions().getWidth())
+                                    .zIndex(polygon.getUiOptions().getzIndex())
                                     .add(polygon.getPoints())
                     );
                     for (LatLng latLng : polygon.getPoints()) {
@@ -47,9 +47,9 @@ public class MapsUtils {
                 for (ExtraPolyline polyline : optionView.getPolylines()) {
                     googleMap.addPolyline(
                             new PolylineOptions()
-                                    .color(polyline.getColor())
-                                    .width(polyline.getWidth())
-                                    .zIndex(polyline.getzIndex())
+                                    .color(polyline.getUiOptions().getColor())
+                                    .width(polyline.getUiOptions().getWidth())
+                                    .zIndex(polyline.getUiOptions().getzIndex())
                                     .add(polyline.getPoints())
                     );
                     for (LatLng latLng : polyline.getPoints()) {

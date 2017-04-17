@@ -6,14 +6,17 @@ import android.os.Parcelable;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public class ExtraPolyline extends UiOptions implements Parcelable {
+public class ExtraPolyline implements Parcelable {
     private LatLng[] points;
+    private UiOptions uiOptions;
+
 
     public ExtraPolyline(LatLng[] points, int strokeColor, int strokeWidth, float zIndex) {
         this.points = points;
-        setColor(strokeColor);
-        setWidth(strokeWidth);
-        setzIndex(zIndex);
+        uiOptions = new UiOptions();
+        uiOptions.setColor(strokeColor);
+        uiOptions.setzIndex(zIndex);
+        uiOptions.setWidth(strokeWidth);
     }
 
     public LatLng[] getPoints() {
@@ -24,6 +27,14 @@ public class ExtraPolyline extends UiOptions implements Parcelable {
         this.points = points;
     }
 
+    public UiOptions getUiOptions() {
+        return uiOptions;
+    }
+
+    public void setUiOptions(UiOptions uiOptions) {
+        this.uiOptions = uiOptions;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -32,13 +43,15 @@ public class ExtraPolyline extends UiOptions implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedArray(this.points, flags);
+        dest.writeParcelable(this.uiOptions, flags);
     }
 
     protected ExtraPolyline(Parcel in) {
         this.points = in.createTypedArray(LatLng.CREATOR);
+        this.uiOptions = in.readParcelable(UiOptions.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<ExtraPolyline> CREATOR = new Parcelable.Creator<ExtraPolyline>() {
+    public static final Creator<ExtraPolyline> CREATOR = new Creator<ExtraPolyline>() {
         @Override
         public ExtraPolyline createFromParcel(Parcel source) {
             return new ExtraPolyline(source);

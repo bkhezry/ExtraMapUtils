@@ -8,16 +8,15 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.github.bkhezry.demoextramapview.R;
 import com.github.bkhezry.demoextramapview.ui.MapsActivity;
 import com.github.bkhezry.demoextramapview.utils.AppUtils;
-import com.github.bkhezry.extramapview.utils.MapsUtils;
 import com.github.bkhezry.extramapview.builder.OptionViewBuilder;
 import com.github.bkhezry.extramapview.model.OptionView;
+import com.github.bkhezry.extramapview.utils.MapsUtils;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
@@ -39,8 +38,8 @@ public class ListViewFragment extends Fragment {
         mList = (ListFragment) getChildFragmentManager().findFragmentById(R.id.list);
         mList.setListAdapter(mAdapter);
 
-        AbsListView lv = mList.getListView();
-        lv.setRecyclerListener(mRecycleListener);
+        //AbsListView lv = mList.getListView();
+        //lv.setRecyclerListener(mRecycleListener);
         return view;
     }
 
@@ -66,9 +65,8 @@ public class ListViewFragment extends Fragment {
             if (row == null) {
                 row = getActivity().getLayoutInflater().inflate(R.layout.list_item, null);
 
-                holder = new ViewHolder();
-                holder.mapView = (MapView) row.findViewById(R.id.mapLite);
-                holder.title = (TextView) row.findViewById(R.id.titleTextView);
+                holder = new ViewHolder(row);
+
 
                 row.setTag(holder);
 
@@ -101,13 +99,18 @@ public class ListViewFragment extends Fragment {
         MapsUtils.showElements(optionView, googleMap);
     }
 
-    class ViewHolder implements OnMapReadyCallback {
+    private class ViewHolder implements OnMapReadyCallback {
 
         MapView mapView;
 
         TextView title;
 
         GoogleMap map;
+
+        private ViewHolder(View view) {
+            mapView = (MapView) view.findViewById(R.id.mapLite);
+            title = (TextView) view.findViewById(R.id.titleTextView);
+        }
 
         @Override
         public void onMapReady(GoogleMap googleMap) {
@@ -129,7 +132,7 @@ public class ListViewFragment extends Fragment {
             });
         }
 
-        public void initializeMapView() {
+        private void initializeMapView() {
             if (mapView != null) {
                 mapView.onCreate(null);
                 mapView.getMapAsync(this);
@@ -138,45 +141,41 @@ public class ListViewFragment extends Fragment {
 
     }
 
-    private AbsListView.RecyclerListener mRecycleListener = new AbsListView.RecyclerListener() {
-
-        @Override
-        public void onMovedToScrapHeap(View view) {
-            ViewHolder holder = (ViewHolder) view.getTag();
-            if (holder != null && holder.map != null) {
-                holder.map.clear();
-                holder.map.setMapType(GoogleMap.MAP_TYPE_NONE);
-            }
-
-        }
-    };
+//    private AbsListView.RecyclerListener mRecycleListener = new AbsListView.RecyclerListener() {
+//
+//        @Override
+//        public void onMovedToScrapHeap(View view) {
+//            ViewHolder holder = (ViewHolder) view.getTag();
+//            if (holder != null && holder.map != null) {
+//                holder.map.clear();
+//                holder.map.setMapType(GoogleMap.MAP_TYPE_NONE);
+//            }
+//
+//        }
+//    };
 
     private static OptionView[] LIST_OPTION_VIEW = {
             new OptionViewBuilder()
                     .withCenterCoordinates(new LatLng(35.6892, 51.3890))
                     .withMarkers(AppUtils.getListExtraMarker())
-//                    .withPolygons(
-//                            DataGenerator.getPolygon_1(),
-//                            DataGenerator.getPolygon_2()
-//                    )
-//                    .withPolylines(
-//                            DataGenerator.getPolyline_1(),
-//                            DataGenerator.getPolyline_2()
-//                    )
                     .withForceCenterMap(false)
                     .withIsListView(true)
                     .build(),
             new OptionViewBuilder()
                     .withCenterCoordinates(new LatLng(35.6892, 51.3890))
-                    .withMarkers(AppUtils.getListExtraMarker_2())
-//                    .withPolygons(
-//                            DataGenerator.getPolygon_1(),
-//                            DataGenerator.getPolygon_2()
-//                    )
-//                    .withPolylines(
-//                            DataGenerator.getPolyline_1(),
-//                            DataGenerator.getPolyline_2()
-//                    )
+                    .withPolygons(
+                            AppUtils.getPolygon_1(),
+                            AppUtils.getPolygon_2()
+                    )
+                    .withForceCenterMap(false)
+                    .withIsListView(true)
+                    .build(),
+            new OptionViewBuilder()
+                    .withCenterCoordinates(new LatLng(35.6892, 51.3890))
+                    .withPolylines(
+                            AppUtils.getPolyline_1(),
+                            AppUtils.getPolyline_2()
+                    )
                     .withForceCenterMap(false)
                     .withIsListView(true)
                     .build()

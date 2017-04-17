@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OptionView implements Parcelable {
+    private String title;
     private LatLng centerLatLng;
     private boolean forceCenterMap;
     private float mapsZoom;
@@ -17,8 +18,8 @@ public class OptionView implements Parcelable {
     private List<ExtraPolyline> polylines;
     private boolean isListView;
 
-
-    public OptionView(LatLng centerCoordinates, boolean forceCenterMap, float mapsZoom, List<ExtraMarker> markers, List<ExtraPolygon> polygons, List<ExtraPolyline> polylines, boolean isListView) {
+    public OptionView(String title, LatLng centerCoordinates, boolean forceCenterMap, float mapsZoom, List<ExtraMarker> markers, List<ExtraPolygon> polygons, List<ExtraPolyline> polylines, boolean isListView) {
+        this.title = title;
         this.centerLatLng = centerCoordinates;
         this.forceCenterMap = forceCenterMap;
         this.mapsZoom = mapsZoom;
@@ -84,6 +85,14 @@ public class OptionView implements Parcelable {
         isListView = listView;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -91,27 +100,28 @@ public class OptionView implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.title);
         dest.writeParcelable(this.centerLatLng, flags);
         dest.writeByte(this.forceCenterMap ? (byte) 1 : (byte) 0);
         dest.writeFloat(this.mapsZoom);
         dest.writeTypedList(this.markers);
         dest.writeTypedList(this.polygons);
-        dest.writeList(this.polylines);
+        dest.writeTypedList(this.polylines);
         dest.writeByte(this.isListView ? (byte) 1 : (byte) 0);
     }
 
     protected OptionView(Parcel in) {
+        this.title = in.readString();
         this.centerLatLng = in.readParcelable(LatLng.class.getClassLoader());
         this.forceCenterMap = in.readByte() != 0;
         this.mapsZoom = in.readFloat();
         this.markers = in.createTypedArrayList(ExtraMarker.CREATOR);
         this.polygons = in.createTypedArrayList(ExtraPolygon.CREATOR);
-        this.polylines = new ArrayList<ExtraPolyline>();
-        in.readList(this.polylines, ExtraPolyline.class.getClassLoader());
+        this.polylines = in.createTypedArrayList(ExtraPolyline.CREATOR);
         this.isListView = in.readByte() != 0;
     }
 
-    public static final Parcelable.Creator<OptionView> CREATOR = new Parcelable.Creator<OptionView>() {
+    public static final Creator<OptionView> CREATOR = new Creator<OptionView>() {
         @Override
         public OptionView createFromParcel(Parcel source) {
             return new OptionView(source);

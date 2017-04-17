@@ -6,16 +6,19 @@ import android.os.Parcelable;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public class ExtraPolygon extends UiOptions implements Parcelable {
+public class ExtraPolygon implements Parcelable {
     private LatLng[] points;
     private int fillColor;
+    private UiOptions uiOptions;
 
     public ExtraPolygon(LatLng[] points, int fillColor, int strokeColor, int strokeWidth, float zIndex) {
         this.points = points;
         this.fillColor = fillColor;
-        setColor(strokeColor);
-        setWidth(strokeWidth);
-        setzIndex(zIndex);
+        uiOptions = new UiOptions();
+        uiOptions.setColor(strokeColor);
+        uiOptions.setzIndex(zIndex);
+        uiOptions.setWidth(strokeWidth);
+
     }
 
     public LatLng[] getPoints() {
@@ -34,6 +37,14 @@ public class ExtraPolygon extends UiOptions implements Parcelable {
         this.fillColor = fillColor;
     }
 
+    public UiOptions getUiOptions() {
+        return uiOptions;
+    }
+
+    public void setUiOptions(UiOptions uiOptions) {
+        this.uiOptions = uiOptions;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -43,14 +54,16 @@ public class ExtraPolygon extends UiOptions implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedArray(this.points, flags);
         dest.writeInt(this.fillColor);
+        dest.writeParcelable(this.uiOptions, flags);
     }
 
     protected ExtraPolygon(Parcel in) {
         this.points = in.createTypedArray(LatLng.CREATOR);
         this.fillColor = in.readInt();
+        this.uiOptions = in.readParcelable(UiOptions.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<ExtraPolygon> CREATOR = new Parcelable.Creator<ExtraPolygon>() {
+    public static final Creator<ExtraPolygon> CREATOR = new Creator<ExtraPolygon>() {
         @Override
         public ExtraPolygon createFromParcel(Parcel source) {
             return new ExtraPolygon(source);

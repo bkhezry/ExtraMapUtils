@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class OptionViewBuilder {
+    private String title;
     private LatLng centerLatLng;
     private float mapsZoom = 14;
     private boolean forceCenterMap = false;
@@ -61,9 +62,13 @@ public class OptionViewBuilder {
         return this;
     }
 
+    public OptionViewBuilder withTitle(String title) {
+        this.title = title;
+        return this;
+    }
 
     public OptionView build() {
-        return new OptionView(centerLatLng, forceCenterMap, mapsZoom, markers, polygons, polylines, isListView);
+        return new OptionView(title, centerLatLng, forceCenterMap, mapsZoom, markers, polygons, polylines, isListView);
     }
 
 
