@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,6 @@ import com.github.bkhezry.extramaputils.model.OptionView;
 import com.github.bkhezry.extramaputils.utils.MapUtils;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -38,8 +38,8 @@ public class ListViewFragment extends Fragment {
         mAdapter = new MapAdapter(getActivity(), LIST_OPTION_VIEW);
         mList = (ListFragment) getChildFragmentManager().findFragmentById(R.id.list);
         mList.setListAdapter(mAdapter);
-        AbsListView lv = mList.getListView();
-        lv.setRecyclerListener(mRecycleListener);
+//        AbsListView lv = mList.getListView();
+//        lv.setRecyclerListener(mRecycleListener);
         return view;
     }
 
@@ -57,33 +57,39 @@ public class ListViewFragment extends Fragment {
             this.optionViews = optionViews;
         }
 
-
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View row = convertView;
             ViewHolder holder;
-
-
-            if (row == null) {
-                row = getActivity().getLayoutInflater().inflate(R.layout.list_item, null);
-                holder = new ViewHolder(row);
-                row.setTag(holder);
+            if (convertView == null) {
+                convertView = getActivity().getLayoutInflater().inflate(R.layout.list_item, null);
+                holder = new ViewHolder();
+                holder.mapView = (MapView) convertView.findViewById(R.id.mapLite);
+                holder.title = (TextView) convertView.findViewById(R.id.titleTextView);
+                holder.cardView = (CardView) convertView.findViewById(R.id.cardView);
+                convertView.setTag(holder);
                 holder.initializeMapView();
                 mMaps.add(holder.mapView);
             } else {
-                holder = (ViewHolder) row.getTag();
+                holder = (ViewHolder) convertView.getTag();
             }
 
-            OptionView optionView = optionViews[position];
+            final OptionView optionView = optionViews[position];
             holder.mapView.setTag(optionView);
-
             if (holder.map != null) {
                 setMapLocation(optionView, holder.map);
             }
-
             holder.title.setText(optionView.getTitle());
-
-            return row;
+            holder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bundle args = new Bundle();
+                    args.putParcelable("optionView", optionView);
+                    Intent intent = new Intent(getActivity(), MapsActivity.class);
+                    intent.putExtra("args", args);
+                    startActivity(intent);
+                }
+            });
+            return convertView;
         }
 
         public HashSet<MapView> getMaps() {
@@ -95,19 +101,18 @@ public class ListViewFragment extends Fragment {
         MapUtils.showElements(optionView, googleMap);
     }
 
-    private class ViewHolder implements OnMapReadyCallback {
+    private static class ViewHolder implements OnMapReadyCallback {
         MapView mapView;
         TextView title;
         GoogleMap map;
+        CardView cardView;
 
-        private ViewHolder(View view) {
-            mapView = (MapView) view.findViewById(R.id.mapLite);
-            title = (TextView) view.findViewById(R.id.titleTextView);
+        private ViewHolder() {
+
         }
 
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            MapsInitializer.initialize(getActivity());
             map = googleMap;
             final OptionView optionView = (OptionView) mapView.getTag();
             if (optionView != null) {
@@ -116,11 +121,7 @@ public class ListViewFragment extends Fragment {
             map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                 @Override
                 public void onMapClick(LatLng latLng) {
-                    Bundle args = new Bundle();
-                    args.putParcelable("optionView", optionView);
-                    Intent intent = new Intent(getActivity(), MapsActivity.class);
-                    intent.putExtra("args", args);
-                    startActivity(intent);
+
                 }
             });
         }
