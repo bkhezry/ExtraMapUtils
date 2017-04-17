@@ -1,6 +1,7 @@
 package com.github.bkhezry.demoextramapview.ui.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
@@ -12,8 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.github.bkhezry.demoextramapview.R;
+import com.github.bkhezry.demoextramapview.ui.MapsActivity;
 import com.github.bkhezry.demoextramapview.utils.AppUtils;
-import com.github.bkhezry.extramapview.Utils.MapsUtils;
+import com.github.bkhezry.extramapview.utils.MapsUtils;
 import com.github.bkhezry.extramapview.builder.OptionViewBuilder;
 import com.github.bkhezry.extramapview.model.OptionView;
 import com.google.android.gms.maps.GoogleMap;
@@ -111,10 +113,20 @@ public class ListViewFragment extends Fragment {
         public void onMapReady(GoogleMap googleMap) {
             MapsInitializer.initialize(getActivity());
             map = googleMap;
-            OptionView optionView = (OptionView) mapView.getTag();
+            final OptionView optionView = (OptionView) mapView.getTag();
             if (optionView != null) {
                 setMapLocation(optionView, map);
             }
+            map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                @Override
+                public void onMapClick(LatLng latLng) {
+                    Bundle args = new Bundle();
+                    args.putParcelable("optionView", optionView);
+                    Intent intent = new Intent(getActivity(), MapsActivity.class);
+                    intent.putExtra("args", args);
+                    startActivity(intent);
+                }
+            });
         }
 
         public void initializeMapView() {

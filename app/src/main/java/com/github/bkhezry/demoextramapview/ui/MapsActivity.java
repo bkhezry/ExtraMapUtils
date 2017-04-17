@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import com.github.bkhezry.demoextramapview.R;
-import com.github.bkhezry.extramapview.Utils.MapsUtils;
+import com.github.bkhezry.extramapview.utils.MapsUtils;
 import com.github.bkhezry.extramapview.model.OptionView;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;

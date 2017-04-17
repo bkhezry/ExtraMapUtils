@@ -1,4 +1,4 @@
-package com.github.bkhezry.extramapview.Utils;
+package com.github.bkhezry.extramapview.utils;
 
 
 import com.github.bkhezry.extramapview.model.ExtraMarker;
@@ -16,7 +16,7 @@ import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MapsUtils {
-    public static void showElements(final OptionView optionView,final GoogleMap googleMap ) {
+    public static void showElements(final OptionView optionView, final GoogleMap googleMap) {
         googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {
