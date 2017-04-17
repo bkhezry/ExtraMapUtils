@@ -1,4 +1,4 @@
-package com.github.bkhezry.demoextramapview.ui.fragment;
+package com.github.bkhezry.demoextramaputils.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,12 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.bkhezry.demoextramapview.R;
-import com.github.bkhezry.demoextramapview.ui.MapsActivity;
-import com.github.bkhezry.demoextramapview.utils.AppUtils;
-import com.github.bkhezry.extramapview.utils.MapsUtils;
-import com.github.bkhezry.extramapview.builder.OptionViewBuilder;
-import com.github.bkhezry.extramapview.model.OptionView;
+import com.github.bkhezry.demoextramaputils.R;
+import com.github.bkhezry.demoextramaputils.ui.MapsActivity;
+import com.github.bkhezry.demoextramaputils.utils.AppUtils;
+import com.github.bkhezry.extramaputils.utils.MapUtils;
+import com.github.bkhezry.extramaputils.builder.OptionViewBuilder;
+import com.github.bkhezry.extramaputils.model.OptionView;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
@@ -61,7 +61,7 @@ public class BasicFragment extends Fragment implements OnMapReadyCallback {
                         )
                         .withForceCenterMap(false)
                         .build();
-        MapsUtils.showElements(optionView, googleMap);
+        MapUtils.showElements(optionView, googleMap);
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {

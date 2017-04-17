@@ -1,4 +1,4 @@
-package com.github.bkhezry.extramapview.model;
+package com.github.bkhezry.extramaputils.model;
 
 
 import android.os.Parcel;
@@ -6,19 +6,17 @@ import android.os.Parcelable;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public class ExtraPolygon implements Parcelable {
+public class ExtraPolyline implements Parcelable {
     private LatLng[] points;
-    private int fillColor;
     private UiOptions uiOptions;
 
-    public ExtraPolygon(LatLng[] points, int fillColor, int strokeColor, int strokeWidth, float zIndex) {
+
+    public ExtraPolyline(LatLng[] points, int strokeColor, int strokeWidth, float zIndex) {
         this.points = points;
-        this.fillColor = fillColor;
         uiOptions = new UiOptions();
         uiOptions.setColor(strokeColor);
         uiOptions.setzIndex(zIndex);
         uiOptions.setWidth(strokeWidth);
-
     }
 
     public LatLng[] getPoints() {
@@ -27,14 +25,6 @@ public class ExtraPolygon implements Parcelable {
 
     public void setPoints(LatLng[] points) {
         this.points = points;
-    }
-
-    public int getFillColor() {
-        return fillColor;
-    }
-
-    public void setFillColor(int fillColor) {
-        this.fillColor = fillColor;
     }
 
     public UiOptions getUiOptions() {
@@ -53,25 +43,23 @@ public class ExtraPolygon implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedArray(this.points, flags);
-        dest.writeInt(this.fillColor);
         dest.writeParcelable(this.uiOptions, flags);
     }
 
-    protected ExtraPolygon(Parcel in) {
+    protected ExtraPolyline(Parcel in) {
         this.points = in.createTypedArray(LatLng.CREATOR);
-        this.fillColor = in.readInt();
         this.uiOptions = in.readParcelable(UiOptions.class.getClassLoader());
     }
 
-    public static final Creator<ExtraPolygon> CREATOR = new Creator<ExtraPolygon>() {
+    public static final Creator<ExtraPolyline> CREATOR = new Creator<ExtraPolyline>() {
         @Override
-        public ExtraPolygon createFromParcel(Parcel source) {
-            return new ExtraPolygon(source);
+        public ExtraPolyline createFromParcel(Parcel source) {
+            return new ExtraPolyline(source);
         }
 
         @Override
-        public ExtraPolygon[] newArray(int size) {
-            return new ExtraPolygon[size];
+        public ExtraPolyline[] newArray(int size) {
+            return new ExtraPolyline[size];
         }
     };
 }

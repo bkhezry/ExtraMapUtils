@@ -1,6 +1,6 @@
-package com.github.bkhezry.extramapview.builder;
+package com.github.bkhezry.extramaputils.builder;
 
-import com.github.bkhezry.extramapview.model.ExtraPolygon;
+import com.github.bkhezry.extramaputils.model.ExtraPolygon;
 import com.google.android.gms.maps.model.LatLng;
 
 public class ExtraPolygonBuilder {

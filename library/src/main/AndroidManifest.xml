@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
-    package="com.github.bkhezry.extramapview">
+    package="com.github.bkhezry.extramaputils">
 
     <application android:label="@string/app_name"
         android:supportsRtl="true">

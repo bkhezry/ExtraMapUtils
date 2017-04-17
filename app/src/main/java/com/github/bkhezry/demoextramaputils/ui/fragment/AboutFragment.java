@@ -1,4 +1,4 @@
-package com.github.bkhezry.demoextramapview.ui.fragment;
+package com.github.bkhezry.demoextramaputils.ui.fragment;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.github.bkhezry.demoextramapview.R;
-import com.github.bkhezry.demoextramapview.utils.AppUtils;
+import com.github.bkhezry.demoextramaputils.R;
+import com.github.bkhezry.demoextramaputils.utils.AppUtils;
 
 
 public class AboutFragment extends Fragment {

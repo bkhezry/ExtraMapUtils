@@ -1,4 +1,4 @@
-package com.github.bkhezry.demoextramapview;
+package com.github.bkhezry.demoextramaputils;
 
 import org.junit.Test;
 

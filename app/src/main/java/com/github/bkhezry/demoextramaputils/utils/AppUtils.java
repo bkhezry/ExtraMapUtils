@@ -1,4 +1,4 @@
-package com.github.bkhezry.demoextramapview.utils;
+package com.github.bkhezry.demoextramaputils.utils;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
@@ -12,13 +12,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.github.bkhezry.demoextramapview.R;
-import com.github.bkhezry.extramapview.builder.ExtraMarkerBuilder;
-import com.github.bkhezry.extramapview.builder.ExtraPolygonBuilder;
-import com.github.bkhezry.extramapview.builder.ExtraPolylineBuilder;
-import com.github.bkhezry.extramapview.model.ExtraMarker;
-import com.github.bkhezry.extramapview.model.ExtraPolygon;
-import com.github.bkhezry.extramapview.model.ExtraPolyline;
+import com.github.bkhezry.demoextramaputils.R;
+import com.github.bkhezry.extramaputils.builder.ExtraMarkerBuilder;
+import com.github.bkhezry.extramaputils.builder.ExtraPolygonBuilder;
+import com.github.bkhezry.extramaputils.builder.ExtraPolylineBuilder;
+import com.github.bkhezry.extramaputils.model.ExtraMarker;
+import com.github.bkhezry.extramaputils.model.ExtraPolygon;
+import com.github.bkhezry.extramaputils.model.ExtraPolyline;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;

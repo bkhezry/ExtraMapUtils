@@ -1,4 +1,4 @@
-package com.github.bkhezry.demoextramapview.ui;
+package com.github.bkhezry.demoextramaputils.ui;
 
 
 import android.os.Bundle;
@@ -9,10 +9,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import com.github.bkhezry.demoextramapview.R;
-import com.github.bkhezry.demoextramapview.ui.fragment.AboutFragment;
-import com.github.bkhezry.demoextramapview.ui.fragment.BasicFragment;
-import com.github.bkhezry.demoextramapview.ui.fragment.ListViewFragment;
+import com.github.bkhezry.demoextramaputils.R;
+import com.github.bkhezry.demoextramaputils.ui.fragment.AboutFragment;
+import com.github.bkhezry.demoextramaputils.ui.fragment.BasicFragment;
+import com.github.bkhezry.demoextramaputils.ui.fragment.ListViewFragment;
 
 public class MainActivity extends AppCompatActivity {
     private Fragment mFragment = new BasicFragment().newInstance();

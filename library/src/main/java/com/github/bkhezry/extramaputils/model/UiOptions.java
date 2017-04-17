@@ -1,4 +1,4 @@
-package com.github.bkhezry.extramapview.model;
+package com.github.bkhezry.extramaputils.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

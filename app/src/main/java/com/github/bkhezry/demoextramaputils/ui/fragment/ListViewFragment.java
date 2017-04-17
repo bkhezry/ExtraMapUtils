@@ -1,4 +1,4 @@
-package com.github.bkhezry.demoextramapview.ui.fragment;
+package com.github.bkhezry.demoextramaputils.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,12 +11,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.github.bkhezry.demoextramapview.R;
-import com.github.bkhezry.demoextramapview.ui.MapsActivity;
-import com.github.bkhezry.demoextramapview.utils.AppUtils;
-import com.github.bkhezry.extramapview.builder.OptionViewBuilder;
-import com.github.bkhezry.extramapview.model.OptionView;
-import com.github.bkhezry.extramapview.utils.MapsUtils;
+import com.github.bkhezry.demoextramaputils.R;
+import com.github.bkhezry.demoextramaputils.ui.MapsActivity;
+import com.github.bkhezry.demoextramaputils.utils.AppUtils;
+import com.github.bkhezry.extramaputils.builder.OptionViewBuilder;
+import com.github.bkhezry.extramaputils.model.OptionView;
+import com.github.bkhezry.extramaputils.utils.MapUtils;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
@@ -96,7 +96,7 @@ public class ListViewFragment extends Fragment {
     }
 
     private static void setMapLocation(OptionView optionView, GoogleMap googleMap) {
-        MapsUtils.showElements(optionView, googleMap);
+        MapUtils.showElements(optionView, googleMap);
     }
 
     private class ViewHolder implements OnMapReadyCallback {

@@ -1,11 +1,11 @@
-package com.github.bkhezry.demoextramapview.ui;
+package com.github.bkhezry.demoextramaputils.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
-import com.github.bkhezry.demoextramapview.R;
-import com.github.bkhezry.extramapview.utils.MapsUtils;
-import com.github.bkhezry.extramapview.model.OptionView;
+import com.github.bkhezry.demoextramaputils.R;
+import com.github.bkhezry.extramaputils.utils.MapUtils;
+import com.github.bkhezry.extramaputils.model.OptionView;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -38,6 +38,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        MapsUtils.showElements(optionView, googleMap);
+        MapUtils.showElements(optionView, googleMap);
     }
 }

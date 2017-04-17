@@ -1,9 +1,9 @@
-package com.github.bkhezry.extramapview.builder;
+package com.github.bkhezry.extramaputils.builder;
 
-import com.github.bkhezry.extramapview.model.ExtraMarker;
-import com.github.bkhezry.extramapview.model.ExtraPolygon;
-import com.github.bkhezry.extramapview.model.ExtraPolyline;
-import com.github.bkhezry.extramapview.model.OptionView;
+import com.github.bkhezry.extramaputils.model.ExtraMarker;
+import com.github.bkhezry.extramaputils.model.ExtraPolygon;
+import com.github.bkhezry.extramaputils.model.ExtraPolyline;
+import com.github.bkhezry.extramaputils.model.OptionView;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
