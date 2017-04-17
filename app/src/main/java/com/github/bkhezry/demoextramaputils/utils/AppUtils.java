@@ -37,6 +37,16 @@ public class AppUtils {
             new LatLng(35.723379, 51.388689),
             new LatLng(35.724067, 51.384462)
     };
+    private static LatLng[] latLngs_3 = {
+            new LatLng(35.70059, 51.37799),
+            new LatLng(35.70139, 51.4052),
+            new LatLng(35.69568, 51.40417),
+            new LatLng(35.6962, 51.39171),
+            new LatLng(35.68874, 51.39297),
+            new LatLng(35.6881, 51.39343),
+            new LatLng(35.6871, 51.40271),
+            new LatLng(35.67984, 51.40129)
+    };
     private static String[] markerNames = {
             "Marker_1",
             "Marker_2",
@@ -60,6 +70,23 @@ public class AppUtils {
                             .build()
             );
         }
+        return extraMarkers;
+    }
+
+    public static List<ExtraMarker> getListMarker() {
+        List<ExtraMarker> extraMarkers = new ArrayList<>();
+        extraMarkers.add(new ExtraMarkerBuilder()
+                .setName("Start")
+                .setCenter(latLngs_3[0])
+                .setIcon(R.drawable.ic_directions_bike_blue_grey_900_36dp)
+                .build()
+        );
+        extraMarkers.add(new ExtraMarkerBuilder()
+                .setName("Start")
+                .setCenter(latLngs_3[latLngs_3.length - 1])
+                .setIcon(R.drawable.ic_directions_bike_blue_grey_900_36dp)
+                .build()
+        );
         return extraMarkers;
     }
 
@@ -108,6 +135,15 @@ public class AppUtils {
     public static ExtraPolyline getPolyline_2() {
         return new ExtraPolylineBuilder()
                 .setPoints(latLngs_2)
+                .setzIndex(0)
+                .setStrokeWidth(10)
+                .setStrokeColor(Color.BLACK)
+                .build();
+    }
+
+    public static ExtraPolyline getPolyline_3() {
+        return new ExtraPolylineBuilder()
+                .setPoints(latLngs_3)
                 .setzIndex(0)
                 .setStrokeWidth(10)
                 .setStrokeColor(Color.BLACK)

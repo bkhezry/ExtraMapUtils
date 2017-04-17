@@ -8,6 +8,7 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -37,9 +38,8 @@ public class ListViewFragment extends Fragment {
         mAdapter = new MapAdapter(getActivity(), LIST_OPTION_VIEW);
         mList = (ListFragment) getChildFragmentManager().findFragmentById(R.id.list);
         mList.setListAdapter(mAdapter);
-
-        //AbsListView lv = mList.getListView();
-        //lv.setRecyclerListener(mRecycleListener);
+        AbsListView lv = mList.getListView();
+        lv.setRecyclerListener(mRecycleListener);
         return view;
     }
 
@@ -50,9 +50,11 @@ public class ListViewFragment extends Fragment {
     private class MapAdapter extends ArrayAdapter<OptionView> {
 
         private final HashSet<MapView> mMaps = new HashSet<>();
+        private OptionView[] optionViews;
 
         public MapAdapter(Context context, OptionView[] optionViews) {
             super(context, R.layout.list_item, R.id.titleTextView, optionViews);
+            this.optionViews = optionViews;
         }
 
 
@@ -64,28 +66,22 @@ public class ListViewFragment extends Fragment {
 
             if (row == null) {
                 row = getActivity().getLayoutInflater().inflate(R.layout.list_item, null);
-
                 holder = new ViewHolder(row);
-
-
                 row.setTag(holder);
-
                 holder.initializeMapView();
-
                 mMaps.add(holder.mapView);
             } else {
-
                 holder = (ViewHolder) row.getTag();
             }
 
-            OptionView optionView = getItem(position);
+            OptionView optionView = optionViews[position];
             holder.mapView.setTag(optionView);
 
             if (holder.map != null) {
                 setMapLocation(optionView, holder.map);
             }
 
-            //holder.title.setText(optionView.name);
+            holder.title.setText(optionView.getTitle());
 
             return row;
         }
@@ -100,11 +96,8 @@ public class ListViewFragment extends Fragment {
     }
 
     private class ViewHolder implements OnMapReadyCallback {
-
         MapView mapView;
-
         TextView title;
-
         GoogleMap map;
 
         private ViewHolder(View view) {
@@ -141,27 +134,28 @@ public class ListViewFragment extends Fragment {
 
     }
 
-//    private AbsListView.RecyclerListener mRecycleListener = new AbsListView.RecyclerListener() {
-//
-//        @Override
-//        public void onMovedToScrapHeap(View view) {
-//            ViewHolder holder = (ViewHolder) view.getTag();
-//            if (holder != null && holder.map != null) {
-//                holder.map.clear();
-//                holder.map.setMapType(GoogleMap.MAP_TYPE_NONE);
-//            }
-//
-//        }
-//    };
+    private AbsListView.RecyclerListener mRecycleListener = new AbsListView.RecyclerListener() {
+
+        @Override
+        public void onMovedToScrapHeap(View view) {
+            ViewHolder holder = (ViewHolder) view.getTag();
+            if (holder != null && holder.map != null) {
+                holder.map.clear();
+            }
+
+        }
+    };
 
     private static OptionView[] LIST_OPTION_VIEW = {
             new OptionViewBuilder()
+                    .withTitle("1")
                     .withCenterCoordinates(new LatLng(35.6892, 51.3890))
                     .withMarkers(AppUtils.getListExtraMarker())
                     .withForceCenterMap(false)
                     .withIsListView(true)
                     .build(),
             new OptionViewBuilder()
+                    .withTitle("2")
                     .withCenterCoordinates(new LatLng(35.6892, 51.3890))
                     .withPolygons(
                             AppUtils.getPolygon_1(),
@@ -171,11 +165,20 @@ public class ListViewFragment extends Fragment {
                     .withIsListView(true)
                     .build(),
             new OptionViewBuilder()
+                    .withTitle("3")
                     .withCenterCoordinates(new LatLng(35.6892, 51.3890))
                     .withPolylines(
                             AppUtils.getPolyline_1(),
                             AppUtils.getPolyline_2()
                     )
+                    .withForceCenterMap(false)
+                    .withIsListView(true)
+                    .build(),
+            new OptionViewBuilder()
+                    .withTitle("4")
+                    .withCenterCoordinates(new LatLng(35.6892, 51.3890))
+                    .withMarkers(AppUtils.getListMarker())
+                    .withPolylines(AppUtils.getPolyline_3())
                     .withForceCenterMap(false)
                     .withIsListView(true)
                     .build()
