@@ -1,5 +1,6 @@
 package com.github.bkhezry.demoextramapview.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.bkhezry.demoextramapview.R;
+import com.github.bkhezry.demoextramapview.ui.MapsActivity;
 import com.github.bkhezry.demoextramapview.utils.AppUtils;
 import com.github.bkhezry.extramapview.ExtraMapView;
 import com.github.bkhezry.extramapview.builder.OptionViewBuilder;
@@ -59,5 +61,15 @@ public class BasicFragment extends Fragment implements OnMapReadyCallback {
                         .withForceCenterMap(false)
                         .build();
         mMap.showExtraMap(optionView, googleMap);
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                Bundle args = new Bundle();
+                args.putParcelable("optionView", optionView);
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                intent.putExtra("args", args);
+                startActivity(intent);
+            }
+        });
     }
 }

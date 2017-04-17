@@ -1,11 +1,14 @@
 package com.github.bkhezry.extramapview.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OptionView {
+public class OptionView implements Parcelable {
     private LatLng centerLatLng;
     private boolean forceCenterMap;
     private float mapsZoom;
@@ -80,4 +83,43 @@ public class OptionView {
     public void setListView(boolean listView) {
         isListView = listView;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.centerLatLng, flags);
+        dest.writeByte(this.forceCenterMap ? (byte) 1 : (byte) 0);
+        dest.writeFloat(this.mapsZoom);
+        dest.writeTypedList(this.markers);
+        dest.writeTypedList(this.polygons);
+        dest.writeList(this.polylines);
+        dest.writeByte(this.isListView ? (byte) 1 : (byte) 0);
+    }
+
+    protected OptionView(Parcel in) {
+        this.centerLatLng = in.readParcelable(LatLng.class.getClassLoader());
+        this.forceCenterMap = in.readByte() != 0;
+        this.mapsZoom = in.readFloat();
+        this.markers = in.createTypedArrayList(ExtraMarker.CREATOR);
+        this.polygons = in.createTypedArrayList(ExtraPolygon.CREATOR);
+        this.polylines = new ArrayList<ExtraPolyline>();
+        in.readList(this.polylines, ExtraPolyline.class.getClassLoader());
+        this.isListView = in.readByte() != 0;
+    }
+
+    public static final Parcelable.Creator<OptionView> CREATOR = new Parcelable.Creator<OptionView>() {
+        @Override
+        public OptionView createFromParcel(Parcel source) {
+            return new OptionView(source);
+        }
+
+        @Override
+        public OptionView[] newArray(int size) {
+            return new OptionView[size];
+        }
+    };
 }
