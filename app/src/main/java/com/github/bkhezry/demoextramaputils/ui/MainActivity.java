@@ -1,7 +1,6 @@
 package com.github.bkhezry.demoextramaputils.ui;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -28,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
                     mFragment = new BasicFragment().newInstance();
                     break;
                 case R.id.navigation_list:
-                    //mFragment = new ListViewFragment().newInstance();
-                    startActivity(new Intent(MainActivity.this, ListViewFragment.class));
+                    mFragment = new ListViewFragment().newInstance();
                     break;
                 case R.id.navigation_about:
                     mFragment = new AboutFragment().newInstance();
