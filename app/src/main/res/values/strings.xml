@@ -7,6 +7,10 @@
     <string name="libraries_title">Libraries &amp; Resources</string>
     <string name="developer_info_title">Developer Info</string>
     <string name="application_info_title">Application Info</string>
+    <string name="square_meters">\u0020 m^2</string>
+    <string name="meters">\u0020 m</string>
+    <string name="area_polygon_label">Area Polygons:\u0020</string>
+    <string name="length_polyline_label">Length Polylines:\u0020</string>
     <string name="application_info_text">
         <![CDATA[
             <p>Version: %1$s</p>
@@ -41,4 +45,5 @@
             <p><a href="https://github.com/google/material-design-icons">Material design icons</a> - Creative Common Attribution 4.0 International License</p>
         ]]>
     </string>
+
 </resources>
