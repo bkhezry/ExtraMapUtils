@@ -1,16 +1,19 @@
 package com.github.bkhezry.extramaputils.builder;
 
+import android.graphics.Color;
+import android.support.annotation.NonNull;
+
 import com.github.bkhezry.extramaputils.model.ExtraPolygon;
 import com.google.android.gms.maps.model.LatLng;
 
 public class ExtraPolygonBuilder {
     private LatLng[] points;
-    private int fillColor;
-    private int strokeColor;
-    private int strokeWidth;
-    private float zIndex;
+    private int fillColor = Color.argb(0, 0, 0, 0);
+    private int strokeColor = Color.argb(255, 0, 0, 0);
+    private int strokeWidth = 10;
+    private float zIndex = 0;
 
-    public ExtraPolygonBuilder setPoints(LatLng[] points) {
+    public ExtraPolygonBuilder setPoints(@NonNull LatLng[] points) {
         this.points = points;
         return this;
     }
@@ -36,6 +39,9 @@ public class ExtraPolygonBuilder {
     }
 
     public ExtraPolygon build() {
+        if (points == null || points.length < 3) {
+            throw new IllegalStateException("please provide array list of latlng points with min size=3");
+        }
         return new ExtraPolygon(points, fillColor, strokeColor, strokeWidth, zIndex);
     }
 }

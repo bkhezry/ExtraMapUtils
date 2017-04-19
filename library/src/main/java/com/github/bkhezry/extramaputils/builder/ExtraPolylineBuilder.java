@@ -1,13 +1,15 @@
 package com.github.bkhezry.extramaputils.builder;
 
+import android.graphics.Color;
+
 import com.github.bkhezry.extramaputils.model.ExtraPolyline;
 import com.google.android.gms.maps.model.LatLng;
 
 public class ExtraPolylineBuilder {
     private LatLng[] points;
-    private int strokeColor;
-    private int strokeWidth;
-    private float zIndex;
+    private int strokeColor = Color.argb(255, 0, 0, 0);
+    private int strokeWidth = 10;
+    private float zIndex = 0;
 
     public ExtraPolylineBuilder setPoints(LatLng[] points) {
         this.points = points;
@@ -30,6 +32,9 @@ public class ExtraPolylineBuilder {
     }
 
     public ExtraPolyline build() {
+        if (points == null || points.length < 2) {
+            throw new IllegalStateException("please provide array list of latlng points with min size=2");
+        }
         return new ExtraPolyline(points, strokeColor, strokeWidth, zIndex);
     }
 }

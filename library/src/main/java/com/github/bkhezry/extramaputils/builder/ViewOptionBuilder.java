@@ -74,7 +74,6 @@ public class ViewOptionBuilder {
     }
 
     public ViewOption build() {
-        //TODO verify values.
         return new ViewOption(title, centerLatLng, forceCenterMap, mapsZoom, markers, polygons, polylines, isListView, styleName);
     }
 
