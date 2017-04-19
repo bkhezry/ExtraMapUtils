@@ -19,7 +19,7 @@ public class ViewOptionBuilder {
     private List<ExtraPolygon> polygons = new ArrayList<>();
     private List<ExtraPolyline> polylines = new ArrayList<>();
     private boolean isListView = false;
-    private ViewOption.StyleDef styleName = ViewOption.StyleDef.DEFAULT;
+    private ViewOption.StyleDef styleName = ViewOption.StyleDef.NIGHT;
 
     public ViewOptionBuilder withCenterCoordinates(LatLng centerLatLng) {
         this.centerLatLng = centerLatLng;

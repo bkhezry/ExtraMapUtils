@@ -2,6 +2,12 @@ package com.github.bkhezry.extramaputils.utils;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 
 import com.github.bkhezry.extramaputils.R;
 import com.github.bkhezry.extramaputils.model.ExtraMarker;
@@ -21,7 +27,7 @@ import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MapUtils {
-    public static void showElements(final ViewOption viewOption, final GoogleMap googleMap, Context context) {
+    public static void showElements(final ViewOption viewOption, final GoogleMap googleMap, final Context context) {
         setSelectedStyle(viewOption.getStyleName(), googleMap, context);
         googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
@@ -29,7 +35,12 @@ public class MapUtils {
                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
                 for (ExtraMarker extraMarker : viewOption.getMarkers()) {
                     builder.include(extraMarker.getCenter());
-                    BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(extraMarker.getIcon());
+                    BitmapDescriptor icon;
+                    if (extraMarker.getIconColor() == Integer.MAX_VALUE) {
+                        icon = BitmapDescriptorFactory.fromResource(extraMarker.getIcon());
+                    } else {
+                        icon = BitmapDescriptorFactory.fromBitmap(changeBitmapColor(context, extraMarker.getIconColor(), extraMarker.getIcon()));
+                    }
                     googleMap.addMarker(
                             new MarkerOptions()
                                     .icon(icon)
@@ -85,24 +96,30 @@ public class MapUtils {
         MapStyleOptions style;
         switch (styleName) {
             case RETRO:
-                // Sets the retro style via raw resource JSON.
                 style = MapStyleOptions.loadRawResourceStyle(context, R.raw.mapstyle_retro);
                 break;
             case NIGHT:
-                // Sets the night style via raw resource JSON.
                 style = MapStyleOptions.loadRawResourceStyle(context, R.raw.mapstyle_night);
                 break;
             case GRAY_SCALE:
-                // Sets the gray scale style via raw resource JSON.
                 style = MapStyleOptions.loadRawResourceStyle(context, R.raw.mapstyle_grayscale);
                 break;
             case DEFAULT:
-                // Removes previously set style, by setting it to null.
                 style = null;
                 break;
             default:
                 return;
         }
         googleMap.setMapStyle(style);
+    }
+
+    private static Bitmap changeBitmapColor(Context context, int color, int icon) {
+        Bitmap ob = BitmapFactory.decodeResource(context.getResources(), icon);
+        Bitmap obm = Bitmap.createBitmap(ob.getWidth(), ob.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(obm);
+        Paint paint = new Paint();
+        paint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP));
+        canvas.drawBitmap(ob, 0f, 0f, paint);
+        return obm;
     }
 }

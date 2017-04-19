@@ -3,6 +3,7 @@ package com.github.bkhezry.demoextramaputils.utils;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.annotation.IdRes;
 import android.text.Html;
 import android.text.Layout;
 import android.text.Spannable;
@@ -53,20 +54,30 @@ public class AppUtils {
             "Marker_3",
             "Marker_4"
     };
-    private static int[] icons = {
+    private static
+    @IdRes
+    int[] icons_1 = {
             R.drawable.ic_person_pin_circle_black_36dp,
             R.drawable.ic_person_pin_circle_black_36dp,
             R.drawable.ic_person_pin_circle_black_36dp,
             R.drawable.ic_person_pin_circle_black_36dp
+    };
+    private static
+    @IdRes
+    int[] icons_2 = {
+            R.drawable.ic_directions_bike_blue_grey_900_36dp,
+            R.drawable.ic_directions_bike_blue_grey_900_36dp
     };
 
     public static List<ExtraMarker> getListExtraMarker() {
         List<ExtraMarker> extraMarkers = new ArrayList<>();
         for (int i = 0; i < markerNames.length; i++) {
             extraMarkers.add(
-                    new ExtraMarkerBuilder().setName(markerNames[i])
+                    new ExtraMarkerBuilder()
+                            .setName(markerNames[i])
                             .setCenter(latLngs_1[i])
-                            .setIcon(icons[i])
+                            .setIcon(icons_1[i])
+                            .setIconColor(Color.WHITE)
                             .build()
             );
         }
@@ -78,13 +89,15 @@ public class AppUtils {
         extraMarkers.add(new ExtraMarkerBuilder()
                 .setName("Start")
                 .setCenter(latLngs_3[0])
-                .setIcon(R.drawable.ic_directions_bike_blue_grey_900_36dp)
+                .setIcon(icons_2[0])
+                .setIconColor(Color.YELLOW)
                 .build()
         );
         extraMarkers.add(new ExtraMarkerBuilder()
-                .setName("Start")
+                .setName("End")
                 .setCenter(latLngs_3[latLngs_3.length - 1])
-                .setIcon(R.drawable.ic_directions_bike_blue_grey_900_36dp)
+                .setIcon(icons_2[1])
+                .setIconColor(Color.YELLOW)
                 .build()
         );
         return extraMarkers;
@@ -96,7 +109,7 @@ public class AppUtils {
             extraMarkers.add(
                     new ExtraMarkerBuilder().setName(markerNames[i])
                             .setCenter(latLngs_2[i])
-                            .setIcon(icons[i])
+                            .setIcon(icons_1[i])
                             .build()
             );
         }
