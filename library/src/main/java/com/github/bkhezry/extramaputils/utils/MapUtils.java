@@ -3,11 +3,9 @@ package com.github.bkhezry.extramaputils.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 
 import com.github.bkhezry.extramaputils.R;
 import com.github.bkhezry.extramaputils.model.ExtraMarker;
@@ -54,12 +52,7 @@ public class MapUtils {
                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
                 for (ExtraMarker extraMarker : viewOption.getMarkers()) {
                     builder.include(extraMarker.getCenter());
-                    BitmapDescriptor icon;
-                    if (extraMarker.getIconColor() == Integer.MAX_VALUE) {
-                        icon = BitmapDescriptorFactory.fromResource(extraMarker.getIcon());
-                    } else {
-                        icon = BitmapDescriptorFactory.fromBitmap(changeBitmapColor(context, extraMarker.getIconColor(), extraMarker.getIcon()));
-                    }
+                    BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(getBitmapFromDrawable(context, extraMarker.getIcon()));
                     googleMap.addMarker(
                             new MarkerOptions()
                                     .icon(icon)
@@ -134,13 +127,12 @@ public class MapUtils {
         googleMap.setMapStyle(style);
     }
 
-    private static Bitmap changeBitmapColor(Context context, int color, int icon) {
-        Bitmap ob = BitmapFactory.decodeResource(context.getResources(), icon);
-        Bitmap obm = Bitmap.createBitmap(ob.getWidth(), ob.getHeight(), Bitmap.Config.ARGB_8888);
+    private static Bitmap getBitmapFromDrawable(Context context, int icon) {
+        Drawable drawable = ContextCompat.getDrawable(context, icon);
+        Bitmap obm = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(obm);
-        Paint paint = new Paint();
-        paint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP));
-        canvas.drawBitmap(ob, 0f, 0f, paint);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
         return obm;
     }
 
