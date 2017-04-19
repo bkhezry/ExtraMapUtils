@@ -29,6 +29,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 public class MapUtils {
     public static void showElements(final ViewOption viewOption, final GoogleMap googleMap, final Context context) {
         setSelectedStyle(viewOption.getStyleName(), googleMap, context);
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {

@@ -44,6 +44,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.github.bkhezry.demoextramaputils.ui.MapsActivity" />
+        <activity android:name="com.github.bkhezry.demoextramaputils.ui.fragment.ListViewFragment" />
     </application>
 
 </manifest>

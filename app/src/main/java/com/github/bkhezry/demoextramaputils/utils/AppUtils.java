@@ -90,14 +90,14 @@ public class AppUtils {
                 .setName("Start")
                 .setCenter(latLngs_3[0])
                 .setIcon(icons_2[0])
-                .setIconColor(Color.YELLOW)
+                .setIconColor(Color.RED)
                 .build()
         );
         extraMarkers.add(new ExtraMarkerBuilder()
                 .setName("End")
                 .setCenter(latLngs_3[latLngs_3.length - 1])
                 .setIcon(icons_2[1])
-                .setIconColor(Color.YELLOW)
+                .setIconColor(Color.RED)
                 .build()
         );
         return extraMarkers;
@@ -159,7 +159,7 @@ public class AppUtils {
                 .setPoints(latLngs_3)
                 .setzIndex(0)
                 .setStrokeWidth(10)
-                .setStrokeColor(Color.BLACK)
+                .setStrokeColor(Color.BLUE)
                 .build();
     }
 
