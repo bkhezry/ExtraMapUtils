@@ -13,20 +13,38 @@ import com.github.bkhezry.extramaputils.R;
 import com.github.bkhezry.extramaputils.model.ExtraMarker;
 import com.github.bkhezry.extramaputils.model.ExtraPolygon;
 import com.github.bkhezry.extramaputils.model.ExtraPolyline;
+import com.github.bkhezry.extramaputils.model.UiOptions;
 import com.github.bkhezry.extramaputils.model.ViewOption;
 import com.github.bkhezry.extramaputils.model.ViewOption.StyleDef;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Dash;
+import com.google.android.gms.maps.model.Dot;
+import com.google.android.gms.maps.model.Gap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PatternItem;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MapUtils {
+    private static final int PATTERN_DASH_LENGTH_PX = 50;
+    private static final int PATTERN_GAP_LENGTH_PX = 20;
+    private static final Dot DOT = new Dot();
+    private static final Dash DASH = new Dash(PATTERN_DASH_LENGTH_PX);
+    private static final Gap GAP = new Gap(PATTERN_GAP_LENGTH_PX);
+    private static final List<PatternItem> PATTERN_DOTTED = Arrays.asList(DOT, GAP);
+    private static final List<PatternItem> PATTERN_DASHED = Arrays.asList(DASH, GAP);
+    private static final List<PatternItem> PATTERN_MIXED = Arrays.asList(DOT, GAP, DOT, DASH, GAP);
+
     public static void showElements(final ViewOption viewOption, final GoogleMap googleMap, final Context context) {
         setSelectedStyle(viewOption.getStyleName(), googleMap, context);
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -55,6 +73,7 @@ public class MapUtils {
                                     .fillColor(polygon.getFillColor())
                                     .strokeColor(polygon.getUiOptions().getColor())
                                     .strokeWidth(polygon.getUiOptions().getWidth())
+                                    .strokePattern(getStrokePattern(polygon.getUiOptions().getStrokePattern()))
                                     .zIndex(polygon.getUiOptions().getzIndex())
                                     .add(polygon.getPoints())
                     );
@@ -67,6 +86,7 @@ public class MapUtils {
                             new PolylineOptions()
                                     .color(polyline.getUiOptions().getColor())
                                     .width(polyline.getUiOptions().getWidth())
+                                    .pattern(getStrokePattern(polyline.getUiOptions().getStrokePattern()))
                                     .zIndex(polyline.getUiOptions().getzIndex())
                                     .add(polyline.getPoints())
                     );
@@ -122,5 +142,24 @@ public class MapUtils {
         paint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP));
         canvas.drawBitmap(ob, 0f, 0f, paint);
         return obm;
+    }
+
+    private static List<PatternItem> getStrokePattern(UiOptions.StrokePatternDef strokePatternDef) {
+        List<PatternItem> patternItems = new ArrayList<>();
+        switch (strokePatternDef) {
+            case DEFAULT:
+                patternItems = null;
+                break;
+            case DASHED:
+                patternItems = PATTERN_DASHED;
+                break;
+            case DOTTED:
+                patternItems = PATTERN_DOTTED;
+                break;
+            case MIXED:
+                patternItems = PATTERN_MIXED;
+                break;
+        }
+        return patternItems;
     }
 }
