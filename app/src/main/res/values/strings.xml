@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ExtraMapView</string>
+    <string name="app_name">ExtraMapUtils</string>
     <string name="title_basic">Basic</string>
     <string name="title_listview">ListView</string>
     <string name="title_about">About</string>
