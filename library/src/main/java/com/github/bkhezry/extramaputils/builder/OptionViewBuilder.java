@@ -3,7 +3,7 @@ package com.github.bkhezry.extramaputils.builder;
 import com.github.bkhezry.extramaputils.model.ExtraMarker;
 import com.github.bkhezry.extramaputils.model.ExtraPolygon;
 import com.github.bkhezry.extramaputils.model.ExtraPolyline;
-import com.github.bkhezry.extramaputils.model.OptionView;
+import com.github.bkhezry.extramaputils.model.ViewOption;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -67,8 +67,8 @@ public class OptionViewBuilder {
         return this;
     }
 
-    public OptionView build() {
-        return new OptionView(title, centerLatLng, forceCenterMap, mapsZoom, markers, polygons, polylines, isListView);
+    public ViewOption build() {
+        return new ViewOption(title, centerLatLng, forceCenterMap, mapsZoom, markers, polygons, polylines, isListView);
     }
 
 

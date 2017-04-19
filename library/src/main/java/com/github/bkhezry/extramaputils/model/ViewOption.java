@@ -8,7 +8,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OptionView implements Parcelable {
+public class ViewOption implements Parcelable {
     private String title;
     private LatLng centerLatLng;
     private boolean forceCenterMap;
@@ -18,7 +18,7 @@ public class OptionView implements Parcelable {
     private List<ExtraPolyline> polylines;
     private boolean isListView;
 
-    public OptionView(String title, LatLng centerCoordinates, boolean forceCenterMap, float mapsZoom, List<ExtraMarker> markers, List<ExtraPolygon> polygons, List<ExtraPolyline> polylines, boolean isListView) {
+    public ViewOption(String title, LatLng centerCoordinates, boolean forceCenterMap, float mapsZoom, List<ExtraMarker> markers, List<ExtraPolygon> polygons, List<ExtraPolyline> polylines, boolean isListView) {
         this.title = title;
         this.centerLatLng = centerCoordinates;
         this.forceCenterMap = forceCenterMap;
@@ -110,7 +110,7 @@ public class OptionView implements Parcelable {
         dest.writeByte(this.isListView ? (byte) 1 : (byte) 0);
     }
 
-    protected OptionView(Parcel in) {
+    protected ViewOption(Parcel in) {
         this.title = in.readString();
         this.centerLatLng = in.readParcelable(LatLng.class.getClassLoader());
         this.forceCenterMap = in.readByte() != 0;
@@ -121,15 +121,15 @@ public class OptionView implements Parcelable {
         this.isListView = in.readByte() != 0;
     }
 
-    public static final Creator<OptionView> CREATOR = new Creator<OptionView>() {
+    public static final Creator<ViewOption> CREATOR = new Creator<ViewOption>() {
         @Override
-        public OptionView createFromParcel(Parcel source) {
-            return new OptionView(source);
+        public ViewOption createFromParcel(Parcel source) {
+            return new ViewOption(source);
         }
 
         @Override
-        public OptionView[] newArray(int size) {
-            return new OptionView[size];
+        public ViewOption[] newArray(int size) {
+            return new ViewOption[size];
         }
     };
 }

@@ -4,7 +4,7 @@ package com.github.bkhezry.extramaputils.utils;
 import com.github.bkhezry.extramaputils.model.ExtraMarker;
 import com.github.bkhezry.extramaputils.model.ExtraPolygon;
 import com.github.bkhezry.extramaputils.model.ExtraPolyline;
-import com.github.bkhezry.extramaputils.model.OptionView;
+import com.github.bkhezry.extramaputils.model.ViewOption;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -16,12 +16,12 @@ import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MapUtils {
-    public static void showElements(final OptionView optionView, final GoogleMap googleMap) {
+    public static void showElements(final ViewOption viewOption, final GoogleMap googleMap) {
         googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {
                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
-                for (ExtraMarker extraMarker : optionView.getMarkers()) {
+                for (ExtraMarker extraMarker : viewOption.getMarkers()) {
                     builder.include(extraMarker.getCenter());
                     BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(extraMarker.getIcon());
                     googleMap.addMarker(
@@ -31,7 +31,7 @@ public class MapUtils {
                                     .title(extraMarker.getName())
                     );
                 }
-                for (ExtraPolygon polygon : optionView.getPolygons()) {
+                for (ExtraPolygon polygon : viewOption.getPolygons()) {
                     googleMap.addPolygon(
                             new PolygonOptions()
                                     .fillColor(polygon.getFillColor())
@@ -44,7 +44,7 @@ public class MapUtils {
                         builder.include(latLng);
                     }
                 }
-                for (ExtraPolyline polyline : optionView.getPolylines()) {
+                for (ExtraPolyline polyline : viewOption.getPolylines()) {
                     googleMap.addPolyline(
                             new PolylineOptions()
                                     .color(polyline.getUiOptions().getColor())
@@ -57,10 +57,10 @@ public class MapUtils {
                     }
                 }
 
-                if (optionView.isForceCenterMap()) {
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(optionView.getCenterLatLng(), optionView.getMapsZoom()));
+                if (viewOption.isForceCenterMap()) {
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(viewOption.getCenterLatLng(), viewOption.getMapsZoom()));
                 } else {
-                    boundMap(optionView.isListView(), builder, googleMap);
+                    boundMap(viewOption.isListView(), builder, googleMap);
                 }
             }
         });

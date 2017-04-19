@@ -17,7 +17,7 @@ import com.github.bkhezry.demoextramaputils.R;
 import com.github.bkhezry.demoextramaputils.ui.MapsActivity;
 import com.github.bkhezry.demoextramaputils.utils.AppUtils;
 import com.github.bkhezry.extramaputils.builder.OptionViewBuilder;
-import com.github.bkhezry.extramaputils.model.OptionView;
+import com.github.bkhezry.extramaputils.model.ViewOption;
 import com.github.bkhezry.extramaputils.utils.MapUtils;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -47,14 +47,14 @@ public class ListViewFragment extends Fragment {
         return new ListViewFragment();
     }
 
-    private class MapAdapter extends ArrayAdapter<OptionView> {
+    private class MapAdapter extends ArrayAdapter<ViewOption> {
 
         private final HashSet<MapView> mMaps = new HashSet<>();
-        private OptionView[] optionViews;
+        private ViewOption[] viewOptions;
 
-        public MapAdapter(Context context, OptionView[] optionViews) {
-            super(context, R.layout.list_item, R.id.titleTextView, optionViews);
-            this.optionViews = optionViews;
+        public MapAdapter(Context context, ViewOption[] viewOptions) {
+            super(context, R.layout.list_item, R.id.titleTextView, viewOptions);
+            this.viewOptions = viewOptions;
         }
 
         @Override
@@ -73,17 +73,17 @@ public class ListViewFragment extends Fragment {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            final OptionView optionView = optionViews[position];
-            holder.mapView.setTag(optionView);
+            final ViewOption viewOption = viewOptions[position];
+            holder.mapView.setTag(viewOption);
             if (holder.map != null) {
-                setMapLocation(optionView, holder.map);
+                setMapLocation(viewOption, holder.map);
             }
-            holder.title.setText(optionView.getTitle());
+            holder.title.setText(viewOption.getTitle());
             holder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Bundle args = new Bundle();
-                    args.putParcelable("optionView", optionView);
+                    args.putParcelable("optionView", viewOption);
                     Intent intent = new Intent(getActivity(), MapsActivity.class);
                     intent.putExtra("args", args);
                     startActivity(intent);
@@ -97,8 +97,8 @@ public class ListViewFragment extends Fragment {
         }
     }
 
-    private static void setMapLocation(OptionView optionView, GoogleMap googleMap) {
-        MapUtils.showElements(optionView, googleMap);
+    private static void setMapLocation(ViewOption viewOption, GoogleMap googleMap) {
+        MapUtils.showElements(viewOption, googleMap);
     }
 
     private static class ViewHolder implements OnMapReadyCallback {
@@ -114,9 +114,9 @@ public class ListViewFragment extends Fragment {
         @Override
         public void onMapReady(GoogleMap googleMap) {
             map = googleMap;
-            final OptionView optionView = (OptionView) mapView.getTag();
-            if (optionView != null) {
-                setMapLocation(optionView, map);
+            final ViewOption viewOption = (ViewOption) mapView.getTag();
+            if (viewOption != null) {
+                setMapLocation(viewOption, map);
             }
             map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                 @Override
@@ -147,7 +147,7 @@ public class ListViewFragment extends Fragment {
         }
     };
 
-    private static OptionView[] LIST_OPTION_VIEW = {
+    private static ViewOption[] LIST_OPTION_VIEW = {
             new OptionViewBuilder()
                     .withTitle("1")
                     .withCenterCoordinates(new LatLng(35.6892, 51.3890))

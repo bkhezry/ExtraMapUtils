@@ -12,7 +12,7 @@ import com.github.bkhezry.demoextramaputils.ui.MapsActivity;
 import com.github.bkhezry.demoextramaputils.utils.AppUtils;
 import com.github.bkhezry.extramaputils.utils.MapUtils;
 import com.github.bkhezry.extramaputils.builder.OptionViewBuilder;
-import com.github.bkhezry.extramaputils.model.OptionView;
+import com.github.bkhezry.extramaputils.model.ViewOption;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
@@ -47,7 +47,7 @@ public class BasicFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(getActivity());
-        final OptionView optionView =
+        final ViewOption viewOption =
                 new OptionViewBuilder()
                         .withCenterCoordinates(new LatLng(35.6892, 51.3890))
                         .withMarkers(AppUtils.getListExtraMarker())
@@ -61,12 +61,12 @@ public class BasicFragment extends Fragment implements OnMapReadyCallback {
                         )
                         .withForceCenterMap(false)
                         .build();
-        MapUtils.showElements(optionView, googleMap);
+        MapUtils.showElements(viewOption, googleMap);
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
                 Bundle args = new Bundle();
-                args.putParcelable("optionView", optionView);
+                args.putParcelable("optionView", viewOption);
                 Intent intent = new Intent(getActivity(), MapsActivity.class);
                 intent.putExtra("args", args);
                 startActivity(intent);
