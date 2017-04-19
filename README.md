@@ -44,7 +44,49 @@ dependencies {
 }
 ```
 
-# more step will be add...
+## 2. Add your code
+add MapView to UI layout
+```xml
+<com.google.android.gms.maps.MapView
+	android:id="@+id/mapLite"
+	android:name="com.google.android.gms.maps.MapFragment"
+	android:layout_width="match_parent"
+	android:layout_height="300dp"
+	app:liteMode="true"
+	app:mapType="normal" />
+```
+```java
+ViewOption viewOption=
+	ViewOptionBuilder()
+                .withStyleName(ViewOption.StyleDef.RETRO)
+                .withCenterCoordinates(new LatLng(35.6892, 51.3890))
+                .withMarkers(AppUtils.getListExtraMarker())
+                .withPolygons(
+                        AppUtils.getPolygon_1()
+                )
+                .withPolylines(
+                        AppUtils.getPolyline_2(),
+                        AppUtils.getPolyline_4()
+                )
+                .withForceCenterMap(false)
+                .build();
+```
+## ViewOption attributes
+
+| Name | Type | Default | Description |
+|:----:|:----:|:-------:|:-----------:|
+|title|String|@NullAble| use in demo as CardView tile |
+|centerLatLng|LatLng|@NullAble| center of Map |
+|forceCenterMap|boolean|false| force map moving to centerLatLng point |
+|mapsZoom|float|14| zoom of map when map moving to centerLatLng |
+|markers|ExtraMarker|@NullAble| list of ExtraMarker that showing on Map |
+|polygons|ExtraPolygon|@NullAble| list of ExtraPolygon that showing on Map |
+|polylines|ExtraPolyline|@NullAble| list of ExtraPolyline that showing on Map |
+|isListView|boolean|false| when using utils in ListView this parameter should be true. because fixing zoom of bounded map |
+|styleName|StyleDef|DEFAULT| style of google map |
+
+
+
 
 # Developed By
 
