@@ -47,21 +47,8 @@ public class BasicFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(getActivity());
-        final ViewOption viewOption =
-                new ViewOptionBuilder()
-                        .withCenterCoordinates(new LatLng(35.6892, 51.3890))
-                        .withMarkers(AppUtils.getListExtraMarker())
-                        .withPolygons(
-                                AppUtils.getPolygon_1(),
-                                AppUtils.getPolygon_2()
-                        )
-                        .withPolylines(
-                                AppUtils.getPolyline_1(),
-                                AppUtils.getPolyline_2()
-                        )
-                        .withForceCenterMap(false)
-                        .build();
-        MapUtils.showElements(viewOption, googleMap,getActivity());
+        final ViewOption viewOption = getViewOption();
+        MapUtils.showElements(viewOption, googleMap, getActivity());
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
@@ -72,5 +59,21 @@ public class BasicFragment extends Fragment implements OnMapReadyCallback {
                 startActivity(intent);
             }
         });
+    }
+
+    public static ViewOption getViewOption() {
+        return new ViewOptionBuilder()
+                .withStyleName(ViewOption.StyleDef.RETRO)
+                .withCenterCoordinates(new LatLng(35.6892, 51.3890))
+                .withMarkers(AppUtils.getListExtraMarker())
+                .withPolygons(
+                        AppUtils.getPolygon_1()
+                )
+                .withPolylines(
+                        AppUtils.getPolyline_2(),
+                        AppUtils.getPolyline_4()
+                )
+                .withForceCenterMap(false)
+                .build();
     }
 }

@@ -3,6 +3,7 @@ package com.github.bkhezry.demoextramaputils.utils;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.annotation.ColorInt;
 import android.support.annotation.IdRes;
 import android.text.Html;
 import android.text.Layout;
@@ -82,16 +83,26 @@ public class AppUtils {
     private static
     @IdRes
     int[] icons_1 = {
-            R.drawable.ic_person_pin_circle_black_36dp,
-            R.drawable.ic_person_pin_circle_black_36dp,
-            R.drawable.ic_person_pin_circle_black_36dp,
-            R.drawable.ic_person_pin_circle_black_36dp
+            R.drawable.ic_person_pin_circle_black_24dp,
+            R.drawable.ic_explore_orange_a700_24dp,
+            R.drawable.ic_hotel_indigo_a400_24dp,
+            R.drawable.ic_store_yellow_a400_24dp
     };
     private static
     @IdRes
     int[] icons_2 = {
-            R.drawable.ic_directions_bike_blue_grey_900_36dp,
-            R.drawable.ic_directions_bike_blue_grey_900_36dp
+            R.drawable.ic_directions_bike_blue_grey_900_24dp,
+            R.drawable.ic_directions_bike_blue_grey_900_24dp
+    };
+
+    private static
+    @ColorInt
+    int[] colors = {
+            Color.argb(255, 0, 0, 0),
+            Color.argb(255, 255, 109, 0),
+            Color.argb(255, 61, 90, 254),
+            Color.argb(255, 255, 234, 0)
+
     };
 
     public static List<ExtraMarker> getListExtraMarker() {
@@ -102,7 +113,7 @@ public class AppUtils {
                             .setName(markerNames[i])
                             .setCenter(latLngs_1[i])
                             .setIcon(icons_1[i])
-                            .setIconColor(Color.BLACK)
+                            .setIconColor(colors[i])
                             .build()
             );
         }
