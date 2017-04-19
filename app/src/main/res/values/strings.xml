@@ -42,6 +42,7 @@
         <![CDATA[
             <p><a href="http://developer.android.com/tools/support-library/index.html">Android Support Library</a> - Apache License v2.0</p>
             <p><a href="https://github.com/googlemaps/android-samples">Google Maps Sample</a> - Apache License v2.0</p>
+            <p><a href="https://github.com/googlemaps/android-maps-utils">Google Maps Utility</a> - Apache License v2.0</p>
             <p><a href="https://github.com/google/material-design-icons">Material design icons</a> - Creative Common Attribution 4.0 International License</p>
         ]]>
     </string>
