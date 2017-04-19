@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class OptionViewBuilder {
+public class ViewOptionBuilder {
     private String title;
     private LatLng centerLatLng;
     private float mapsZoom = 14;
@@ -19,63 +19,63 @@ public class OptionViewBuilder {
     private List<ExtraPolygon> polygons = new ArrayList<>();
     private List<ExtraPolyline> polylines = new ArrayList<>();
     private boolean isListView = false;
-    private String styleName;
+    private ViewOption.StyleDef styleName = ViewOption.StyleDef.DEFAULT;
 
-    public OptionViewBuilder withCenterCoordinates(LatLng centerLatLng) {
+    public ViewOptionBuilder withCenterCoordinates(LatLng centerLatLng) {
         this.centerLatLng = centerLatLng;
         return this;
 
     }
 
-    public OptionViewBuilder withMapsZoom(float mapsZoom) {
+    public ViewOptionBuilder withMapsZoom(float mapsZoom) {
         this.mapsZoom = mapsZoom;
         return this;
     }
 
-    public OptionViewBuilder withMarkers(List<ExtraMarker> markers) {
+    public ViewOptionBuilder withMarkers(List<ExtraMarker> markers) {
         this.markers = markers;
         return this;
     }
 
-    public OptionViewBuilder withMarkers(ExtraMarker... markers) {
+    public ViewOptionBuilder withMarkers(ExtraMarker... markers) {
         this.markers.addAll(Arrays.asList(markers));
         return this;
     }
 
-    public OptionViewBuilder withPolygons(ExtraPolygon... polygons) {
+    public ViewOptionBuilder withPolygons(ExtraPolygon... polygons) {
         this.polygons.addAll(Arrays.asList(polygons));
         return this;
     }
 
 
-    public OptionViewBuilder withPolylines(ExtraPolyline... polylines) {
+    public ViewOptionBuilder withPolylines(ExtraPolyline... polylines) {
         this.polylines.addAll(Arrays.asList(polylines));
         return this;
     }
 
-    public OptionViewBuilder withForceCenterMap(boolean withForceCenterMap) {
+    public ViewOptionBuilder withForceCenterMap(boolean withForceCenterMap) {
         this.forceCenterMap = withForceCenterMap;
         return this;
     }
 
-    public OptionViewBuilder withIsListView(boolean isListView) {
+    public ViewOptionBuilder withIsListView(boolean isListView) {
         this.isListView = isListView;
         return this;
     }
 
-    public OptionViewBuilder withTitle(String title) {
+    public ViewOptionBuilder withTitle(String title) {
         this.title = title;
         return this;
     }
 
-    public OptionViewBuilder withStyleName(String styleName) {
+    public ViewOptionBuilder withStyleName(ViewOption.StyleDef styleName) {
         this.styleName = styleName;
         return this;
     }
 
     public ViewOption build() {
         //TODO verify values.
-        return new ViewOption(title, centerLatLng, forceCenterMap, mapsZoom, markers, polygons, polylines, isListView,styleName);
+        return new ViewOption(title, centerLatLng, forceCenterMap, mapsZoom, markers, polygons, polylines, isListView, styleName);
     }
 
 

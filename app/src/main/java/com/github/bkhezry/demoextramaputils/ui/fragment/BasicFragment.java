@@ -11,7 +11,7 @@ import com.github.bkhezry.demoextramaputils.R;
 import com.github.bkhezry.demoextramaputils.ui.MapsActivity;
 import com.github.bkhezry.demoextramaputils.utils.AppUtils;
 import com.github.bkhezry.extramaputils.utils.MapUtils;
-import com.github.bkhezry.extramaputils.builder.OptionViewBuilder;
+import com.github.bkhezry.extramaputils.builder.ViewOptionBuilder;
 import com.github.bkhezry.extramaputils.model.ViewOption;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -48,7 +48,7 @@ public class BasicFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(getActivity());
         final ViewOption viewOption =
-                new OptionViewBuilder()
+                new ViewOptionBuilder()
                         .withCenterCoordinates(new LatLng(35.6892, 51.3890))
                         .withMarkers(AppUtils.getListExtraMarker())
                         .withPolygons(
@@ -61,7 +61,7 @@ public class BasicFragment extends Fragment implements OnMapReadyCallback {
                         )
                         .withForceCenterMap(false)
                         .build();
-        MapUtils.showElements(viewOption, googleMap);
+        MapUtils.showElements(viewOption, googleMap,getActivity());
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {

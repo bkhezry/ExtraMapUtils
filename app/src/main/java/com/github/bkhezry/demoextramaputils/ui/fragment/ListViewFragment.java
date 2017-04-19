@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.github.bkhezry.demoextramaputils.R;
 import com.github.bkhezry.demoextramaputils.ui.MapsActivity;
 import com.github.bkhezry.demoextramaputils.utils.AppUtils;
-import com.github.bkhezry.extramaputils.builder.OptionViewBuilder;
+import com.github.bkhezry.extramaputils.builder.ViewOptionBuilder;
 import com.github.bkhezry.extramaputils.model.ViewOption;
 import com.github.bkhezry.extramaputils.utils.MapUtils;
 import com.google.android.gms.maps.GoogleMap;
@@ -51,10 +51,12 @@ public class ListViewFragment extends Fragment {
 
         private final HashSet<MapView> mMaps = new HashSet<>();
         private ViewOption[] viewOptions;
+        private Context context;
 
         public MapAdapter(Context context, ViewOption[] viewOptions) {
             super(context, R.layout.list_item, R.id.titleTextView, viewOptions);
             this.viewOptions = viewOptions;
+            this.context = context;
         }
 
         @Override
@@ -66,6 +68,7 @@ public class ListViewFragment extends Fragment {
                 holder.mapView = (MapView) convertView.findViewById(R.id.mapLite);
                 holder.title = (TextView) convertView.findViewById(R.id.titleTextView);
                 holder.cardView = (CardView) convertView.findViewById(R.id.cardView);
+                holder.context = context;
                 convertView.setTag(holder);
                 holder.initializeMapView();
                 mMaps.add(holder.mapView);
@@ -76,7 +79,7 @@ public class ListViewFragment extends Fragment {
             final ViewOption viewOption = viewOptions[position];
             holder.mapView.setTag(viewOption);
             if (holder.map != null) {
-                setMapLocation(viewOption, holder.map);
+                setMapLocation(viewOption, holder.map, context);
             }
             holder.title.setText(viewOption.getTitle());
             holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -97,8 +100,8 @@ public class ListViewFragment extends Fragment {
         }
     }
 
-    private static void setMapLocation(ViewOption viewOption, GoogleMap googleMap) {
-        MapUtils.showElements(viewOption, googleMap);
+    private static void setMapLocation(ViewOption viewOption, GoogleMap googleMap, Context context) {
+        MapUtils.showElements(viewOption, googleMap, context);
     }
 
     private static class ViewHolder implements OnMapReadyCallback {
@@ -106,6 +109,7 @@ public class ListViewFragment extends Fragment {
         TextView title;
         GoogleMap map;
         CardView cardView;
+        Context context;
 
         private ViewHolder() {
 
@@ -116,7 +120,7 @@ public class ListViewFragment extends Fragment {
             map = googleMap;
             final ViewOption viewOption = (ViewOption) mapView.getTag();
             if (viewOption != null) {
-                setMapLocation(viewOption, map);
+                setMapLocation(viewOption, map, context);
             }
             map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                 @Override
@@ -148,14 +152,14 @@ public class ListViewFragment extends Fragment {
     };
 
     private static ViewOption[] LIST_OPTION_VIEW = {
-            new OptionViewBuilder()
+            new ViewOptionBuilder()
                     .withTitle("1")
                     .withCenterCoordinates(new LatLng(35.6892, 51.3890))
                     .withMarkers(AppUtils.getListExtraMarker())
                     .withForceCenterMap(false)
                     .withIsListView(true)
                     .build(),
-            new OptionViewBuilder()
+            new ViewOptionBuilder()
                     .withTitle("2")
                     .withCenterCoordinates(new LatLng(35.6892, 51.3890))
                     .withPolygons(
@@ -165,7 +169,7 @@ public class ListViewFragment extends Fragment {
                     .withForceCenterMap(false)
                     .withIsListView(true)
                     .build(),
-            new OptionViewBuilder()
+            new ViewOptionBuilder()
                     .withTitle("3")
                     .withCenterCoordinates(new LatLng(35.6892, 51.3890))
                     .withPolylines(
@@ -175,7 +179,7 @@ public class ListViewFragment extends Fragment {
                     .withForceCenterMap(false)
                     .withIsListView(true)
                     .build(),
-            new OptionViewBuilder()
+            new ViewOptionBuilder()
                     .withTitle("4")
                     .withCenterCoordinates(new LatLng(35.6892, 51.3890))
                     .withMarkers(AppUtils.getListMarker())

@@ -38,6 +38,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        MapUtils.showElements(viewOption, googleMap);
+        MapUtils.showElements(viewOption, googleMap, this);
     }
 }
