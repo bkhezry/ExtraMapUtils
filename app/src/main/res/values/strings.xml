@@ -14,7 +14,7 @@
     <string name="application_info_text">
         <![CDATA[
             <p>Version: %1$s</p>
-            <p>ExtraMapView library</p>
+            <p>ExtraMapUtils library</p>
             <p>This application is open source at <a href="https://github.com/bkhezry/ExtraMapUtils">https://github.com/bkhezry/ExtraMapUtils</a></p>
         ]]>
     </string>

@@ -187,7 +187,7 @@ public class AppUtils {
                 .setPoints(latLngs_2)
                 .setzIndex(0)
                 .setStrokeWidth(10)
-                .setStrokeColor(Color.argb(100, 0, 0, 0))
+                .setStrokeColor(Color.argb(100, 255, 0, 0))
                 .build();
     }
 
