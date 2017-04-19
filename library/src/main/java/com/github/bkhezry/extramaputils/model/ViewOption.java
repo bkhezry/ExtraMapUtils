@@ -17,11 +17,15 @@ public class ViewOption implements Parcelable {
     private List<ExtraPolygon> polygons;
     private List<ExtraPolyline> polylines;
     private boolean isListView;
-    private String styleName;
+    private StyleDef styleName;
+
+    public enum StyleDef {
+        NIGHT, RETRO, GRAY_SCALE, DEFAULT
+    }
 
     public ViewOption(String title, LatLng centerCoordinates, boolean forceCenterMap, float mapsZoom,
                       List<ExtraMarker> markers, List<ExtraPolygon> polygons,
-                      List<ExtraPolyline> polylines, boolean isListView, String styleName) {
+                      List<ExtraPolyline> polylines, boolean isListView, StyleDef styleName) {
         this.title = title;
         this.centerLatLng = centerCoordinates;
         this.forceCenterMap = forceCenterMap;
@@ -97,11 +101,11 @@ public class ViewOption implements Parcelable {
         this.title = title;
     }
 
-    public String getStyleName() {
+    public StyleDef getStyleName() {
         return styleName;
     }
 
-    public void setStyleName(String styleName) {
+    public void setStyleName(StyleDef styleName) {
         this.styleName = styleName;
     }
 
@@ -120,7 +124,7 @@ public class ViewOption implements Parcelable {
         dest.writeTypedList(this.polygons);
         dest.writeTypedList(this.polylines);
         dest.writeByte(this.isListView ? (byte) 1 : (byte) 0);
-        dest.writeString(this.styleName);
+        dest.writeInt(this.styleName == null ? -1 : this.styleName.ordinal());
     }
 
     protected ViewOption(Parcel in) {
@@ -132,7 +136,8 @@ public class ViewOption implements Parcelable {
         this.polygons = in.createTypedArrayList(ExtraPolygon.CREATOR);
         this.polylines = in.createTypedArrayList(ExtraPolyline.CREATOR);
         this.isListView = in.readByte() != 0;
-        this.styleName = in.readString();
+        int tmpStyleName = in.readInt();
+        this.styleName = tmpStyleName == -1 ? null : StyleDef.values()[tmpStyleName];
     }
 
     public static final Creator<ViewOption> CREATOR = new Creator<ViewOption>() {
