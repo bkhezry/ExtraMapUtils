@@ -14,7 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.github.bkhezry.demoextramaputils.R;
-import com.github.bkhezry.demoextramaputils.ui.MapsActivity;
+import com.github.bkhezry.demoextramaputils.ui.activity.MapsActivity;
 import com.github.bkhezry.demoextramaputils.utils.AppUtils;
 import com.github.bkhezry.extramaputils.builder.ViewOptionBuilder;
 import com.github.bkhezry.extramaputils.model.ViewOption;

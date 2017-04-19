@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.bkhezry.demoextramaputils.R;
-import com.github.bkhezry.demoextramaputils.ui.MapsActivity;
+import com.github.bkhezry.demoextramaputils.ui.activity.MapsActivity;
 import com.github.bkhezry.demoextramaputils.utils.AppUtils;
 import com.github.bkhezry.extramaputils.utils.MapUtils;
 import com.github.bkhezry.extramaputils.builder.ViewOptionBuilder;

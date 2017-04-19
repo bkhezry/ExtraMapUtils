@@ -1,4 +1,4 @@
-package com.github.bkhezry.demoextramaputils.ui;
+package com.github.bkhezry.demoextramaputils.ui.activity;
 
 
 import android.os.Bundle;
