@@ -13,12 +13,13 @@ public class ExtraPolyline implements Parcelable {
     private LatLng[] points;
     private UiOptions uiOptions;
 
-    public ExtraPolyline(LatLng[] points, int strokeColor, int strokeWidth, float zIndex) {
+    public ExtraPolyline(LatLng[] points, int strokeColor, int strokeWidth, float zIndex, UiOptions.StrokePatternDef strokePattern) {
         this.points = points;
         uiOptions = new UiOptions();
         uiOptions.setColor(strokeColor);
         uiOptions.setzIndex(zIndex);
         uiOptions.setWidth(strokeWidth);
+        uiOptions.setStrokePattern(strokePattern);
     }
 
     public double getLength() {

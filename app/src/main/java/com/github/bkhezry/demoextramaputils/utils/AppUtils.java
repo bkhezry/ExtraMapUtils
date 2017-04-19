@@ -21,6 +21,7 @@ import com.github.bkhezry.extramaputils.builder.ExtraPolylineBuilder;
 import com.github.bkhezry.extramaputils.model.ExtraMarker;
 import com.github.bkhezry.extramaputils.model.ExtraPolygon;
 import com.github.bkhezry.extramaputils.model.ExtraPolyline;
+import com.github.bkhezry.extramaputils.model.UiOptions;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -205,6 +206,7 @@ public class AppUtils {
                 .setzIndex(0)
                 .setStrokeWidth(10)
                 .setStrokeColor(Color.argb(100, 0, 255, 0))
+                .setStrokePattern(UiOptions.StrokePatternDef.MIXED)
                 .build();
     }
 

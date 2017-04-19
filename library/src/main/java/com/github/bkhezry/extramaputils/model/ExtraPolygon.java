@@ -14,14 +14,14 @@ public class ExtraPolygon implements Parcelable {
     private int fillColor;
     private UiOptions uiOptions;
 
-    public ExtraPolygon(LatLng[] points, int fillColor, int strokeColor, int strokeWidth, float zIndex) {
+    public ExtraPolygon(LatLng[] points, int fillColor, int strokeColor, int strokeWidth, float zIndex, UiOptions.StrokePatternDef strokePattern) {
         this.points = points;
         this.fillColor = fillColor;
         uiOptions = new UiOptions();
         uiOptions.setColor(strokeColor);
         uiOptions.setzIndex(zIndex);
         uiOptions.setWidth(strokeWidth);
-
+        uiOptions.setStrokePattern(strokePattern);
     }
 
     public double getArea() {
