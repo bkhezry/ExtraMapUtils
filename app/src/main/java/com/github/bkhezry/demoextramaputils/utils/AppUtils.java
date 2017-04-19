@@ -48,6 +48,31 @@ public class AppUtils {
             new LatLng(35.6871, 51.40271),
             new LatLng(35.67984, 51.40129)
     };
+    private static LatLng[] latLngs_4 = {
+            new LatLng(35.70026, 51.34731),
+            new LatLng(35.70239, 51.34707),
+            new LatLng(35.70403, 51.34773),
+            new LatLng(35.70675, 51.34782),
+            new LatLng(35.70685, 51.34101),
+            new LatLng(35.70643, 51.34019),
+            new LatLng(35.7066, 51.33965),
+            new LatLng(35.70629, 51.33763),
+            new LatLng(35.70206, 51.33782),
+            new LatLng(35.70179, 51.33928),
+            new LatLng(35.70132, 51.34008),
+            new LatLng(35.70054, 51.34067),
+            new LatLng(35.69935, 51.34089),
+            new LatLng(35.69829, 51.34018),
+            new LatLng(35.69772, 51.33879),
+            new LatLng(35.69768, 51.33715),
+            new LatLng(35.69787, 51.3358),
+            new LatLng(35.69845, 51.33512),
+            new LatLng(35.69954, 51.3345),
+            new LatLng(35.69958, 51.3258),
+            new LatLng(35.69944, 51.3159),
+            new LatLng(35.70612, 51.31573),
+            new LatLng(35.70615, 51.31872)
+    };
     private static String[] markerNames = {
             "Marker_1",
             "Marker_2",
@@ -121,7 +146,7 @@ public class AppUtils {
                 .setPoints(latLngs_1)
                 .setzIndex(0)
                 .setStrokeWidth(10)
-                .setStrokeColor(Color.BLACK)
+                .setStrokeColor(Color.argb(100, 0, 0, 0))
                 .setFillColor(Color.argb(100, 200, 200, 200))
                 .build();
     }
@@ -131,8 +156,8 @@ public class AppUtils {
                 .setPoints(latLngs_2)
                 .setzIndex(0)
                 .setStrokeWidth(5)
-                .setStrokeColor(Color.BLACK)
-                .setFillColor(Color.argb(200, 100, 100, 100))
+                .setStrokeColor(Color.argb(100, 0, 0, 0))
+                .setFillColor(Color.argb(100, 0, 100, 100))
                 .build();
     }
 
@@ -141,7 +166,7 @@ public class AppUtils {
                 .setPoints(latLngs_1)
                 .setzIndex(0)
                 .setStrokeWidth(5)
-                .setStrokeColor(Color.BLACK)
+                .setStrokeColor(Color.argb(100, 0, 0, 0))
                 .build();
     }
 
@@ -150,7 +175,7 @@ public class AppUtils {
                 .setPoints(latLngs_2)
                 .setzIndex(0)
                 .setStrokeWidth(10)
-                .setStrokeColor(Color.BLACK)
+                .setStrokeColor(Color.argb(100, 0, 0, 0))
                 .build();
     }
 
@@ -159,7 +184,16 @@ public class AppUtils {
                 .setPoints(latLngs_3)
                 .setzIndex(0)
                 .setStrokeWidth(10)
-                .setStrokeColor(Color.BLUE)
+                .setStrokeColor(Color.argb(100, 255, 255, 0))
+                .build();
+    }
+
+    public static ExtraPolyline getPolyline_4() {
+        return new ExtraPolylineBuilder()
+                .setPoints(latLngs_4)
+                .setzIndex(0)
+                .setStrokeWidth(10)
+                .setStrokeColor(Color.argb(100, 0, 255, 0))
                 .build();
     }
 

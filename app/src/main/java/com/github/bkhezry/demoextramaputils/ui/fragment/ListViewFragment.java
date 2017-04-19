@@ -175,8 +175,7 @@ public class ListViewFragment extends Fragment {
                     .withTitle("Default")
                     .withCenterCoordinates(new LatLng(35.6892, 51.3890))
                     .withPolylines(
-                            AppUtils.getPolyline_1(),
-                            AppUtils.getPolyline_2()
+                            AppUtils.getPolyline_4()
                     )
                     .withForceCenterMap(false)
                     .withIsListView(true)
