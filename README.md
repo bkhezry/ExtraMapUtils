@@ -1,5 +1,8 @@
 ## simple library for handle markers, polygons and polylines on google maps.
 
+[![](https://jitpack.io/v/bkhezry/ExtraMapUtils.svg)](https://jitpack.io/#bkhezry/ExtraMapUtils)
+[![Build Status](https://travis-ci.org/bkhezry/ExtraMapUtils.svg?branch=master)](https://travis-ci.org/bkhezry/ExtraMapUtils)
+
 **Requirements**
 - JDK 8
 - Android SDK Build tools 25.0.2
