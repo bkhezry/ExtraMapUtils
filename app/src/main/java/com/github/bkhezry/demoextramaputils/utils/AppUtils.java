@@ -77,7 +77,7 @@ public class AppUtils {
                             .setName(markerNames[i])
                             .setCenter(latLngs_1[i])
                             .setIcon(icons_1[i])
-                            .setIconColor(Color.WHITE)
+                            .setIconColor(Color.BLACK)
                             .build()
             );
         }
