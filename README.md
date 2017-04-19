@@ -3,21 +3,21 @@
 [![](https://jitpack.io/v/bkhezry/ExtraMapUtils.svg)](https://jitpack.io/#bkhezry/ExtraMapUtils)
 [![Build Status](https://travis-ci.org/bkhezry/ExtraMapUtils.svg?branch=master)](https://travis-ci.org/bkhezry/ExtraMapUtils)
 
-**Requirements**
+ExtraMapUtils is an android library to make working with map markers, polygon and polyline drawing on googlemaps, more convenient.
+
+**Project Setup and Dependencies**
 - JDK 8
 - Android SDK Build tools 25.0.2
-- Android SDK 25
-- Android Support Repository
-- Android Support Library 25.3.0
+- Supports API Level +17
+- AppCompat & Cardview libraries 25.3.0
+- Google Play Services Maps 10.2.0
 
-**A quick overview**
-- compatible with **API Level 17**
-- provide multiple theme for google maps
-- add multiple marker, polygon & polyline in simple way
-- support Vector drawable for marker icon
-- provide demo of using library in ListView
-- lite mode supported
-- get **area** of polygon & **length** of polyline supported
+**Highlights**
+- Provides multiple themea to apply on MapView
+- Add multiple markers, polygons & polylines easily
+- Supports vector drawable for marker icon
+- Supports Lite Mode
+- Supports calculating `area` of polygon & `length` of polyline
 
 # Preview
 ## Demo
@@ -71,7 +71,7 @@ new ViewOptionBuilder()
 	.withForceCenterMap(false)
 	.build();
 ```
-after declare ViewOption add this code for show elements in maps
+after declaring the ViewOption, add this code for showing elements on the MapView
 ```java
  MapUtils.showElements(viewOption, googleMap, getActivity());
  ```
