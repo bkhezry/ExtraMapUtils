@@ -17,8 +17,11 @@ public class ViewOption implements Parcelable {
     private List<ExtraPolygon> polygons;
     private List<ExtraPolyline> polylines;
     private boolean isListView;
+    private String styleName;
 
-    public ViewOption(String title, LatLng centerCoordinates, boolean forceCenterMap, float mapsZoom, List<ExtraMarker> markers, List<ExtraPolygon> polygons, List<ExtraPolyline> polylines, boolean isListView) {
+    public ViewOption(String title, LatLng centerCoordinates, boolean forceCenterMap, float mapsZoom,
+                      List<ExtraMarker> markers, List<ExtraPolygon> polygons,
+                      List<ExtraPolyline> polylines, boolean isListView, String styleName) {
         this.title = title;
         this.centerLatLng = centerCoordinates;
         this.forceCenterMap = forceCenterMap;
@@ -27,6 +30,7 @@ public class ViewOption implements Parcelable {
         this.polygons = polygons;
         this.polylines = polylines;
         this.isListView = isListView;
+        this.styleName = styleName;
     }
 
     public LatLng getCenterLatLng() {
@@ -93,6 +97,14 @@ public class ViewOption implements Parcelable {
         this.title = title;
     }
 
+    public String getStyleName() {
+        return styleName;
+    }
+
+    public void setStyleName(String styleName) {
+        this.styleName = styleName;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -108,6 +120,7 @@ public class ViewOption implements Parcelable {
         dest.writeTypedList(this.polygons);
         dest.writeTypedList(this.polylines);
         dest.writeByte(this.isListView ? (byte) 1 : (byte) 0);
+        dest.writeString(this.styleName);
     }
 
     protected ViewOption(Parcel in) {
@@ -119,6 +132,7 @@ public class ViewOption implements Parcelable {
         this.polygons = in.createTypedArrayList(ExtraPolygon.CREATOR);
         this.polylines = in.createTypedArrayList(ExtraPolyline.CREATOR);
         this.isListView = in.readByte() != 0;
+        this.styleName = in.readString();
     }
 
     public static final Creator<ViewOption> CREATOR = new Creator<ViewOption>() {

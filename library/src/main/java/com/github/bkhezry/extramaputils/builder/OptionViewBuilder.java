@@ -19,6 +19,7 @@ public class OptionViewBuilder {
     private List<ExtraPolygon> polygons = new ArrayList<>();
     private List<ExtraPolyline> polylines = new ArrayList<>();
     private boolean isListView = false;
+    private String styleName;
 
     public OptionViewBuilder withCenterCoordinates(LatLng centerLatLng) {
         this.centerLatLng = centerLatLng;
@@ -67,8 +68,14 @@ public class OptionViewBuilder {
         return this;
     }
 
+    public OptionViewBuilder withStyleName(String styleName) {
+        this.styleName = styleName;
+        return this;
+    }
+
     public ViewOption build() {
-        return new ViewOption(title, centerLatLng, forceCenterMap, mapsZoom, markers, polygons, polylines, isListView);
+        //TODO verify values.
+        return new ViewOption(title, centerLatLng, forceCenterMap, mapsZoom, markers, polygons, polylines, isListView,styleName);
     }
 
 
