@@ -5,6 +5,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.maps.android.SphericalUtil;
+
+import java.util.Arrays;
 
 public class ExtraPolygon implements Parcelable {
     private LatLng[] points;
@@ -19,6 +22,10 @@ public class ExtraPolygon implements Parcelable {
         uiOptions.setzIndex(zIndex);
         uiOptions.setWidth(strokeWidth);
 
+    }
+
+    public double getArea() {
+        return SphericalUtil.computeArea(Arrays.asList(points));
     }
 
     public LatLng[] getPoints() {

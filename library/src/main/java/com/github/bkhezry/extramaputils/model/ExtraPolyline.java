@@ -5,11 +5,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.maps.android.SphericalUtil;
+
+import java.util.Arrays;
 
 public class ExtraPolyline implements Parcelable {
     private LatLng[] points;
     private UiOptions uiOptions;
-
 
     public ExtraPolyline(LatLng[] points, int strokeColor, int strokeWidth, float zIndex) {
         this.points = points;
@@ -17,6 +19,10 @@ public class ExtraPolyline implements Parcelable {
         uiOptions.setColor(strokeColor);
         uiOptions.setzIndex(zIndex);
         uiOptions.setWidth(strokeWidth);
+    }
+
+    public double getLength() {
+        return SphericalUtil.computeLength(Arrays.asList(points));
     }
 
     public LatLng[] getPoints() {
