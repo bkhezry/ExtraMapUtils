@@ -71,6 +71,11 @@ new ViewOptionBuilder()
 	.withForceCenterMap(false)
 	.build();
 ```
+after declare ViewOption add this code for show elements in maps
+```java
+ MapUtils.showElements(viewOption, googleMap, getActivity());
+ ```
+ 
 ## ViewOption attributes
 
 | Name | Type | Default | Description |
