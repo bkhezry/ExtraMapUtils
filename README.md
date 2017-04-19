@@ -13,10 +13,11 @@
 **A quick overview**
 - compatible with **API Level 17**
 - provide multiple theme for google maps
-- add multiple markers, polygons & polylines in simple way
+- add multiple marker, polygon & polyline in simple way
 - support Vector drawable for marker icon
 - provide demo of using library in ListView
 - lite mode supported
+- get **area** of polygon & **length** of polyline supported
 
 # Preview
 ## Demo
@@ -56,20 +57,19 @@ add MapView to UI layout
 	app:mapType="normal" />
 ```
 ```java
-ViewOption viewOption=
-	ViewOptionBuilder()
-                .withStyleName(ViewOption.StyleDef.RETRO)
-                .withCenterCoordinates(new LatLng(35.6892, 51.3890))
-                .withMarkers(AppUtils.getListExtraMarker())
-                .withPolygons(
-                        AppUtils.getPolygon_1()
-                )
-                .withPolylines(
-                        AppUtils.getPolyline_2(),
-                        AppUtils.getPolyline_4()
-                )
-                .withForceCenterMap(false)
-                .build();
+new ViewOptionBuilder()
+	.withStyleName(ViewOption.StyleDef.RETRO)
+	.withCenterCoordinates(new LatLng(35.6892, 51.3890))
+	.withMarkers(AppUtils.getListExtraMarker())
+	.withPolygons(
+		AppUtils.getPolygon_1()
+	)
+	.withPolylines(
+		AppUtils.getPolyline_2(),
+		AppUtils.getPolyline_4()
+	)
+	.withForceCenterMap(false)
+	.build();
 ```
 ## ViewOption attributes
 
@@ -85,9 +85,74 @@ ViewOption viewOption=
 |isListView|boolean|false| when using utils in ListView this parameter should be true. because fixing zoom of bounded map |
 |styleName|StyleDef|DEFAULT| style of google map |
 
+### declare ExtraMarker
+```java
+new ExtraMarkerBuilder()
+	.setName("Start")
+	.setCenter(latLngs_3[0])
+	.setIcon(icons_2[0])
+	.build()
+```		
+## ExtraMarker attributes
+
+| Name | Type | Default | Description |
+|:----:|:----:|:-------:|:-----------:|
+|name|String|@NullAble| label of Marker |
+|center|LatLng|@NoneNull| center of Marker |
+|icon|int|@NoneNull| icon of marker |
+
+### delare ExtraPolygon
+```java
+new ExtraPolygonBuilder()
+	.setPoints(latLngs_1)
+	.setzIndex(0)
+	.setStrokeWidth(10)
+	.setStrokeColor(Color.argb(100, 0, 0, 0))
+	.setFillColor(Color.argb(100, 200, 200, 200))
+	.build();
+```
+## ExtraPolygon attributes
+| Name | Type | Default | Description |
+|:----:|:----:|:-------:|:-----------:|
+|points|LatLang[]|@NoneNull| list of point |
+|fillColor|int|none color| color of polygon filling |
+|uiOptions|UiOption|@NoneNull|some parameter of polygon |
+
+### declare ExtraPolyline
+```java
+ new ExtraPolylineBuilder()
+                .setPoints(latLngs_2)
+                .setzIndex(0)
+                .setStrokeWidth(10)
+                .setStrokeColor(Color.argb(100, 255, 0, 0))
+                .build();
+```	
+## ExtraPolyline attributes
+| Name | Type | Default | Description |
+|:----:|:----:|:-------:|:-----------:|
+|points|LatLang[]|@NoneNull| list of point |
+|uiOptions|UiOption|@NoneNull|some parameter of polyline |
 
 
+## UiOption attributes
+| Name | Type | Default | Description |
+|:----:|:----:|:-------:|:-----------:|
+|strokeColor|int|Color.BLACK| line color |
+|strokeWidth|int|10|width of line |
+|zIndex|int|0|zIndex of polyline or polygon |
+|strokePattern|StrokePatternDef|Default| stroke pattern of line|
 
+ **getArea()** method in ExtraPolygon return Area of polygon in square meters.
+ **getLength** method in ExtraPolyline return Length of polyline in meters.
+
+## Todo
+
+ * clustering support for markers
+ * add geoJson layers to map
+ * add more demo for mixed elements.
+ * javadoc
+ * ...
+ 
 # Developed By
 
 * Behrouz Khezry
