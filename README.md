@@ -1,6 +1,7 @@
 ## simple library for handle markers, polygons and polylines on google maps.
 
 [![](https://jitpack.io/v/bkhezry/ExtraMapUtils.svg)](https://jitpack.io/#bkhezry/ExtraMapUtils)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ExtraMapUtils-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5616)
 [![Build Status](https://travis-ci.org/bkhezry/ExtraMapUtils.svg?branch=master)](https://travis-ci.org/bkhezry/ExtraMapUtils)
 
 ExtraMapUtils is an android library to make working with map markers, polygon and polyline drawing on googlemaps, more convenient.
