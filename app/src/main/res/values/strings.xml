@@ -11,6 +11,11 @@
     <string name="meters">\u0020 m</string>
     <string name="area_polygon_label">Area Polygons:\u0020</string>
     <string name="length_polyline_label">Length Polylines:\u0020</string>
+    <string name="title_loader">Data Loader</string>
+    <string name="load_kml_label">Load KML</string>
+    <string name="load_geojson_label">Load GeoJson</string>
+    <string name="geo_json_url">https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson</string>
+    <string name="kml_url">http://googlemaps.github.io/kml-samples/morekml/Polygons/Polygons.Google_Campus.kml</string>
     <string name="application_info_text">
         <![CDATA[
             <p>Version: %1$s</p>
@@ -46,5 +51,6 @@
             <p><a href="https://github.com/google/material-design-icons">Material design icons</a> - Creative Common Attribution 4.0 International License</p>
         ]]>
     </string>
+
 
 </resources>
