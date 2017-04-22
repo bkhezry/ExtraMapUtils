@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:id="@+id/relativeMaps"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp">
+
+    <Button
+        android:id="@+id/geojson_load"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="@string/load_geojson_label" />
+
+    <Button
+        android:id="@+id/kml_load"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/geojson_load"
+        android:textAllCaps="false"
+        android:text="@string/load_kml_label" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:layout_centerInParent="true"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="25dp"
+        card_view:contentPadding="25dp">
+
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapLite"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            app:liteMode="true"
+            app:mapType="normal" />
+
+
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
