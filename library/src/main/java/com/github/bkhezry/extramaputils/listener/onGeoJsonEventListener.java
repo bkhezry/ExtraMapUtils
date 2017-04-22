@@ -1,4 +1,4 @@
-package com.github.bkhezry.extramaputils;
+package com.github.bkhezry.extramaputils.listener;
 
 import com.google.maps.android.data.Feature;
 import com.google.maps.android.data.geojson.GeoJsonLayer;
