@@ -19,14 +19,16 @@ ExtraMapUtils is an android library to make working with map markers, polygon an
 - Supports vector drawable for marker icon
 - Supports Lite Mode
 - Supports calculating `area` of polygon & `length` of polyline
+- Supports `GeoJson` & `KML` as layer from url or resource file
 
 # Preview
 ## Demo
 You can download the latest demo APK from here: https://github.com/bkhezry/ExtraMapUtils/blob/master/assets/DemoExtraMapUtils.apk
 
 ## Screenshots
-<img src="assets/screenshot_1.png" />
-<img src="assets/screenshot_2.png" />
+<img src="assets/screenshot-1.png" />
+<img src="assets/screenshot-2.png" />
+<img src="assets/screenshot-3.png" />
 
 # Setup
 ## 1. Provide the gradle dependency
@@ -42,7 +44,7 @@ allprojects {
 Add the dependency:
 ```gradle
 dependencies {
-	compile 'com.github.bkhezry:ExtraMapUtils:1.1.0'
+	compile 'com.github.bkhezry:ExtraMapUtils:1.2.0'
 }
 ```
 
@@ -150,13 +152,33 @@ new ExtraPolygonBuilder()
 
  **getArea()** method in ExtraPolygon return Area of polygon in square meters.
  **getLength** method in ExtraPolyline return Length of polyline in meters.
+ 
+## add GeoJson to ViewOption
+```java
+new ViewOptionBuilder()
+	    .withTitle("GeoJson")
+	    .withGeoJson(context.getString(R.string.geo_json_url))
+	    .withStyleName(ViewOption.StyleDef.DEFAULT)
+	    .withGeoJsonEventListener(new onGeoJsonEventListener() {
+		@Override
+		public void onFeatureClick(Feature feature) {
+		    //Do more things.
+		}
 
+		@Override
+		public void onGeoJsonLoaded(GeoJsonLayer geoJsonLayer) {
+		    AppUtils.addColorsToMarkers(geoJsonLayer);
+		}
+	    })
+	    .withIsListView(true)
+	    .build();
+```	    
 ## Todo
 
- * clustering support for markers
- * add geoJson layers to map
- * add more demo for mixed elements.
- * javadoc
+ - [ ] clustering support for markers
+ - [x] add GeoJson & KML layers to map
+ - [ ] add more demo for mixed elements.
+ - [ ] javadoc
  * ...
  
 # Developed By
