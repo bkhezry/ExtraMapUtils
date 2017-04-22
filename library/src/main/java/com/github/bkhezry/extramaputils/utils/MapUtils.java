@@ -5,7 +5,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.webkit.URLUtil;
 
 import com.github.bkhezry.extramaputils.R;
 import com.github.bkhezry.extramaputils.model.ExtraMarker;
@@ -14,6 +17,7 @@ import com.github.bkhezry.extramaputils.model.ExtraPolyline;
 import com.github.bkhezry.extramaputils.model.UiOptions;
 import com.github.bkhezry.extramaputils.model.ViewOption;
 import com.github.bkhezry.extramaputils.model.ViewOption.StyleDef;
+import com.github.bkhezry.extramaputils.onGeoJsonEventListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -28,10 +32,22 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PatternItem;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.android.data.Feature;
+import com.google.maps.android.data.geojson.GeoJsonLayer;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MapUtils {
     private static final int PATTERN_DASH_LENGTH_PX = 50;
@@ -44,13 +60,16 @@ public class MapUtils {
     private static final List<PatternItem> PATTERN_MIXED = Arrays.asList(DOT, GAP, DOT, DASH, GAP);
 
     public static void showElements(final ViewOption viewOption, final GoogleMap googleMap, final Context context) {
+
         setSelectedStyle(viewOption.getStyleName(), googleMap, context);
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {
+                int count = 0;
                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
                 for (ExtraMarker extraMarker : viewOption.getMarkers()) {
+                    count++;
                     builder.include(extraMarker.getCenter());
                     BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(getBitmapFromDrawable(context, extraMarker.getIcon()));
                     googleMap.addMarker(
@@ -61,6 +80,7 @@ public class MapUtils {
                     );
                 }
                 for (ExtraPolygon polygon : viewOption.getPolygons()) {
+                    count++;
                     googleMap.addPolygon(
                             new PolygonOptions()
                                     .fillColor(polygon.getFillColor())
@@ -75,6 +95,7 @@ public class MapUtils {
                     }
                 }
                 for (ExtraPolyline polyline : viewOption.getPolylines()) {
+                    count++;
                     googleMap.addPolyline(
                             new PolylineOptions()
                                     .color(polyline.getUiOptions().getColor())
@@ -90,13 +111,88 @@ public class MapUtils {
 
                 if (viewOption.isForceCenterMap()) {
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(viewOption.getCenterLatLng(), viewOption.getMapsZoom()));
-                } else {
+                } else if (count != 0) {
                     boundMap(viewOption.isListView(), builder, googleMap);
+                }
+                if (!viewOption.getGeoJsonUrl().equals("") && URLUtil.isValidUrl(viewOption.getGeoJsonUrl())) {
+                    loadGeoJson(viewOption.getGeoJsonUrl(), googleMap, context, viewOption.getEventListener());
+                }
+                if (viewOption.getGeoJsonRes() != Integer.MAX_VALUE) {
+                    loadGeoJsonRes(viewOption.getGeoJsonRes(), googleMap, context, viewOption.getEventListener());
                 }
             }
         });
 
     }
+
+    private static void loadGeoJsonRes(int geoJsonRes, GoogleMap googleMap, Context context, onGeoJsonEventListener eventListener) {
+        try {
+            GeoJsonLayer geoJsonLayer = new GeoJsonLayer(googleMap, geoJsonRes, context);
+            addGeoJsonLayerToMap(geoJsonLayer, googleMap, context, eventListener);
+            if (eventListener != null)
+                eventListener.onGeoJsonLoaded(geoJsonLayer);
+        } catch (IOException e) {
+            Log.e("GeoJsonResException:", "GeoJSON file could not be read");
+        } catch (JSONException e) {
+            Log.e("GeoJsonResException:", "GeoJSON file could not be converted to a JSONObject");
+        }
+    }
+
+    private static void loadGeoJson(String geoJsonUrl, final GoogleMap googleMap, final Context context, final onGeoJsonEventListener eventListener) {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(geoJsonUrl)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("LoadGeoJsonException:", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String geoJson = response.body().string();
+                if (!geoJson.equals("")) {
+                    handleGeoJsonString(geoJson, googleMap, context, eventListener);
+                }
+            }
+        });
+    }
+
+    private static void handleGeoJsonString(String geoJson, GoogleMap googleMap, final Context context, onGeoJsonEventListener eventListener) {
+        try {
+            GeoJsonLayer geoJsonLayer = new GeoJsonLayer(googleMap, new JSONObject(geoJson));
+            if (eventListener != null)
+                eventListener.onGeoJsonLoaded(geoJsonLayer);
+            addGeoJsonLayerToMap(geoJsonLayer, googleMap, context, eventListener);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private static void addGeoJsonLayerToMap(final GeoJsonLayer layer, final GoogleMap googleMap, final Context context, final onGeoJsonEventListener eventListener) {
+        Handler mainHandler = new Handler(context.getMainLooper());
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                layer.addLayerToMap();
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(layer.getBoundingBox(), 50));
+                layer.setOnFeatureClickListener(new GeoJsonLayer.GeoJsonOnFeatureClickListener() {
+                    @Override
+                    public void onFeatureClick(Feature feature) {
+                        if (eventListener != null)
+                            eventListener.onFeatureClick(feature);
+                    }
+
+                });
+            }
+        });
+
+
+    }
+
 
     private static void boundMap(final boolean isListView, final LatLngBounds.Builder builder, final GoogleMap googleMap) {
         LatLngBounds bounds = builder.build();
@@ -154,4 +250,5 @@ public class MapUtils {
         }
         return patternItems;
     }
+
 }
