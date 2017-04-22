@@ -18,9 +18,7 @@ import com.github.bkhezry.demoextramaputils.ui.activity.DataLoaderActivity;
 import com.github.bkhezry.demoextramaputils.ui.activity.MapsActivity;
 import com.github.bkhezry.demoextramaputils.utils.AppUtils;
 import com.github.bkhezry.extramaputils.builder.ViewOptionBuilder;
-import com.github.bkhezry.extramaputils.listener.onKMLEventListener;
 import com.github.bkhezry.extramaputils.model.ViewOption;
-import com.github.bkhezry.extramaputils.listener.onGeoJsonEventListener;
 import com.github.bkhezry.extramaputils.utils.MapUtils;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -28,9 +26,6 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
-import com.google.maps.android.data.Feature;
-import com.google.maps.android.data.geojson.GeoJsonLayer;
-import com.google.maps.android.data.kml.KmlLayer;
 
 import java.util.HashSet;
 
@@ -198,45 +193,6 @@ public class ListViewFragment extends Fragment {
                     .withMarkers(AppUtils.getListMarker())
                     .withPolylines(AppUtils.getPolyline_3())
                     .withForceCenterMap(false)
-                    .withIsListView(true)
-                    .build(),
-            new ViewOptionBuilder()
-                    .withTitle("GeoJson")
-                    .withGeoJson("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson")
-                    //.withGeoJson(R.raw.all_day)
-                    .withStyleName(ViewOption.StyleDef.DEFAULT)
-                    .withCenterCoordinates(new LatLng(35.6892, 51.3890))
-                    .withForceCenterMap(false)
-                    .withGeoJsonEventListener(new onGeoJsonEventListener() {
-                        @Override
-                        public void onFeatureClick(Feature feature) {
-                            //Do more things.
-                        }
-
-                        @Override
-                        public void onGeoJsonLoaded(GeoJsonLayer geoJsonLayer) {
-                            AppUtils.addColorsToMarkers(geoJsonLayer);
-                        }
-                    })
-                    .withIsListView(true)
-                    .build(),
-            new ViewOptionBuilder()
-                    .withTitle("KML")
-                    .withKML("http://googlemaps.github.io/kml-samples/morekml/Polygons/Polygons.Google_Campus.kml")
-                    .withStyleName(ViewOption.StyleDef.DEFAULT)
-                    .withCenterCoordinates(new LatLng(35.6892, 51.3890))
-                    .withForceCenterMap(false)
-                    .withKMLEventListener(new onKMLEventListener() {
-                        @Override
-                        public void onFeatureClick(Feature feature) {
-
-                        }
-
-                        @Override
-                        public void onKMLLoaded(KmlLayer kmlLayer) {
-
-                        }
-                    })
                     .withIsListView(true)
                     .build()
 
