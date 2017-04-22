@@ -44,7 +44,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.github.bkhezry.demoextramaputils.ui.activity.MapsActivity" />
-        <activity android:name="com.github.bkhezry.demoextramaputils.ui.activity.GeoJsonActivity" />
+        <activity android:name="com.github.bkhezry.demoextramaputils.ui.activity.DataLoaderActivity" />
     </application>
 
 </manifest>

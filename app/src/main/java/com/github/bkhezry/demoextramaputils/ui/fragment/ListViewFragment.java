@@ -14,7 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.github.bkhezry.demoextramaputils.R;
-import com.github.bkhezry.demoextramaputils.ui.activity.GeoJsonActivity;
+import com.github.bkhezry.demoextramaputils.ui.activity.DataLoaderActivity;
 import com.github.bkhezry.demoextramaputils.ui.activity.MapsActivity;
 import com.github.bkhezry.demoextramaputils.utils.AppUtils;
 import com.github.bkhezry.extramaputils.builder.ViewOptionBuilder;
@@ -93,7 +93,7 @@ public class ListViewFragment extends Fragment {
                     Intent intent;
                     args.putParcelable("optionView", viewOption);
                     if (viewOption.getTitle().equals("GeoJson") || viewOption.getTitle().equals("KML")) {
-                        intent = new Intent(getActivity(), GeoJsonActivity.class);
+                        intent = new Intent(getActivity(), DataLoaderActivity.class);
                     } else {
                         intent = new Intent(getActivity(), MapsActivity.class);
                     }
