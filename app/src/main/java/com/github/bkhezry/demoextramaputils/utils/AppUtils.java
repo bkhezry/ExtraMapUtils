@@ -21,7 +21,12 @@ import com.github.bkhezry.extramaputils.model.ExtraMarker;
 import com.github.bkhezry.extramaputils.model.ExtraPolygon;
 import com.github.bkhezry.extramaputils.model.ExtraPolyline;
 import com.github.bkhezry.extramaputils.model.UiOptions;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.maps.android.data.geojson.GeoJsonFeature;
+import com.google.maps.android.data.geojson.GeoJsonLayer;
+import com.google.maps.android.data.geojson.GeoJsonPointStyle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -263,5 +268,42 @@ public class AppUtils {
             end--;
         }
         return charSequence.subSequence(0, end + 1);
+    }
+
+    public static void addColorsToMarkers(GeoJsonLayer layer) {
+        // Iterate over all the features stored in the layer
+        for (GeoJsonFeature feature : layer.getFeatures()) {
+            // Check if the magnitude property exists
+            if (feature.getProperty("mag") != null && feature.hasProperty("place")) {
+                double magnitude = Double.parseDouble(feature.getProperty("mag"));
+
+                // Get the icon for the feature
+                BitmapDescriptor pointIcon = BitmapDescriptorFactory
+                        .defaultMarker(magnitudeToColor(magnitude));
+
+                // Create a new point style
+                GeoJsonPointStyle pointStyle = new GeoJsonPointStyle();
+
+                // Set options for the point style
+                pointStyle.setIcon(pointIcon);
+                pointStyle.setTitle("Magnitude of " + magnitude);
+                pointStyle.setSnippet("Earthquake occured " + feature.getProperty("place"));
+
+                // Assign the point style to the feature
+                feature.setPointStyle(pointStyle);
+            }
+        }
+    }
+
+    private static float magnitudeToColor(double magnitude) {
+        if (magnitude < 1.0) {
+            return BitmapDescriptorFactory.HUE_CYAN;
+        } else if (magnitude < 2.5) {
+            return BitmapDescriptorFactory.HUE_GREEN;
+        } else if (magnitude < 4.5) {
+            return BitmapDescriptorFactory.HUE_YELLOW;
+        } else {
+            return BitmapDescriptorFactory.HUE_RED;
+        }
     }
 }

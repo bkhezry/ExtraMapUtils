@@ -14,10 +14,12 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.github.bkhezry.demoextramaputils.R;
+import com.github.bkhezry.demoextramaputils.ui.activity.GeoJsonActivity;
 import com.github.bkhezry.demoextramaputils.ui.activity.MapsActivity;
 import com.github.bkhezry.demoextramaputils.utils.AppUtils;
 import com.github.bkhezry.extramaputils.builder.ViewOptionBuilder;
 import com.github.bkhezry.extramaputils.model.ViewOption;
+import com.github.bkhezry.extramaputils.onGeoJsonEventListener;
 import com.github.bkhezry.extramaputils.utils.MapUtils;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -25,6 +27,8 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.maps.android.data.Feature;
+import com.google.maps.android.data.geojson.GeoJsonLayer;
 
 import java.util.HashSet;
 
@@ -84,8 +88,13 @@ public class ListViewFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Bundle args = new Bundle();
+                    Intent intent;
                     args.putParcelable("optionView", viewOption);
-                    Intent intent = new Intent(getActivity(), MapsActivity.class);
+                    if (viewOption.getTitle().equals("GeoJson")) {
+                        intent = new Intent(getActivity(), GeoJsonActivity.class);
+                    } else {
+                        intent = new Intent(getActivity(), MapsActivity.class);
+                    }
                     intent.putExtra("args", args);
                     startActivity(intent);
                 }
@@ -188,6 +197,27 @@ public class ListViewFragment extends Fragment {
                     .withPolylines(AppUtils.getPolyline_3())
                     .withForceCenterMap(false)
                     .withIsListView(true)
+                    .build(),
+            new ViewOptionBuilder()
+                    .withTitle("GeoJson")
+                    //.withGeojson("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson")
+                    .withGeoJson(R.raw.all_day)
+                    .withStyleName(ViewOption.StyleDef.DEFAULT)
+                    .withCenterCoordinates(new LatLng(35.6892, 51.3890))
+                    .withForceCenterMap(false)
+                    .withEventListener(new onGeoJsonEventListener() {
+                        @Override
+                        public void onFeatureClick(Feature feature) {
+
+                        }
+
+                        @Override
+                        public void onGeoJsonLoaded(GeoJsonLayer geoJsonLayer) {
+                            AppUtils.addColorsToMarkers(geoJsonLayer);
+                        }
+                    })
+                    .withIsListView(true)
                     .build()
+
     };
 }
