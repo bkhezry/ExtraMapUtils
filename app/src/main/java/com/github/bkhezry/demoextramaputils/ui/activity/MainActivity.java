@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import com.github.bkhezry.demoextramaputils.R;
 import com.github.bkhezry.demoextramaputils.ui.fragment.AboutFragment;
 import com.github.bkhezry.demoextramaputils.ui.fragment.BasicFragment;
+import com.github.bkhezry.demoextramaputils.ui.fragment.DataLoaderFragment;
 import com.github.bkhezry.demoextramaputils.ui.fragment.ListViewFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_basic:
                     mFragment = new BasicFragment().newInstance();
                     title = getResources().getString(R.string.title_basic);
+                    break;
+                case R.id.navigation_loader:
+                    mFragment = new DataLoaderFragment().newInstance();
+                    title = getResources().getString(R.string.title_loader);
                     break;
                 case R.id.navigation_list:
                     mFragment = new ListViewFragment().newInstance();
