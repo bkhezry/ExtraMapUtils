@@ -1,6 +1,7 @@
 package com.github.bkhezry.extramaputils.builder;
 
-import com.github.bkhezry.extramaputils.onGeoJsonEventListener;
+import com.github.bkhezry.extramaputils.listener.onGeoJsonEventListener;
+import com.github.bkhezry.extramaputils.listener.onKMLEventListener;
 import com.github.bkhezry.extramaputils.model.ExtraMarker;
 import com.github.bkhezry.extramaputils.model.ExtraPolygon;
 import com.github.bkhezry.extramaputils.model.ExtraPolyline;
@@ -23,7 +24,10 @@ public class ViewOptionBuilder {
     private ViewOption.StyleDef styleName = ViewOption.StyleDef.DEFAULT;
     private String geoJsonUrl = "";
     private int geoJsonRes = Integer.MAX_VALUE;
-    private onGeoJsonEventListener eventListener;
+    private onGeoJsonEventListener geoJsonEventListener;
+    private String kmlUrl = "";
+    private int kmlRes = Integer.MAX_VALUE;
+    private onKMLEventListener kmlEventListener;
 
     public ViewOptionBuilder withCenterCoordinates(LatLng centerLatLng) {
         this.centerLatLng = centerLatLng;
@@ -87,13 +91,27 @@ public class ViewOptionBuilder {
         return this;
     }
 
-    public ViewOptionBuilder withEventListener(onGeoJsonEventListener eventListener) {
-        this.eventListener = eventListener;
+    public ViewOptionBuilder withGeoJsonEventListener(onGeoJsonEventListener geoJsonEventListener) {
+        this.geoJsonEventListener = geoJsonEventListener;
         return this;
     }
 
+    public ViewOptionBuilder withKML(String kmlUrl) {
+        this.kmlUrl = kmlUrl;
+        return this;
+    }
+
+    public ViewOptionBuilder withKML(int kmlRes) {
+        this.kmlRes = kmlRes;
+        return this;
+    }
+    public ViewOptionBuilder withKMLEventListener(onKMLEventListener kmlEventListener) {
+        this.kmlEventListener = kmlEventListener;
+        return this;
+    }
     public ViewOption build() {
-        return new ViewOption(title, centerLatLng, forceCenterMap, mapsZoom, markers, polygons, polylines, isListView, styleName, geoJsonUrl, geoJsonRes, eventListener);
+        return new ViewOption(title, centerLatLng, forceCenterMap, mapsZoom, markers, polygons,
+                polylines, isListView, styleName, geoJsonUrl, geoJsonRes, geoJsonEventListener, kmlUrl, kmlRes,kmlEventListener);
     }
 
 
