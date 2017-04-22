@@ -200,15 +200,15 @@ public class ListViewFragment extends Fragment {
                     .build(),
             new ViewOptionBuilder()
                     .withTitle("GeoJson")
-                    //.withGeojson("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson")
-                    .withGeoJson(R.raw.all_day)
+                    .withGeoJson("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson")
+                    //.withGeoJson(R.raw.all_day)
                     .withStyleName(ViewOption.StyleDef.DEFAULT)
                     .withCenterCoordinates(new LatLng(35.6892, 51.3890))
                     .withForceCenterMap(false)
                     .withEventListener(new onGeoJsonEventListener() {
                         @Override
                         public void onFeatureClick(Feature feature) {
-
+                            //Do more things.
                         }
 
                         @Override
