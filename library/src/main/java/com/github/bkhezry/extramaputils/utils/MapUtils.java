@@ -11,13 +11,14 @@ import android.util.Log;
 import android.webkit.URLUtil;
 
 import com.github.bkhezry.extramaputils.R;
+import com.github.bkhezry.extramaputils.listener.onGeoJsonEventListener;
+import com.github.bkhezry.extramaputils.listener.onKMLEventListener;
 import com.github.bkhezry.extramaputils.model.ExtraMarker;
 import com.github.bkhezry.extramaputils.model.ExtraPolygon;
 import com.github.bkhezry.extramaputils.model.ExtraPolyline;
 import com.github.bkhezry.extramaputils.model.UiOptions;
 import com.github.bkhezry.extramaputils.model.ViewOption;
 import com.github.bkhezry.extramaputils.model.ViewOption.StyleDef;
-import com.github.bkhezry.extramaputils.onGeoJsonEventListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -34,11 +35,18 @@ import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.data.Feature;
 import com.google.maps.android.data.geojson.GeoJsonLayer;
+import com.google.maps.android.data.kml.KmlContainer;
+import com.google.maps.android.data.kml.KmlLayer;
+import com.google.maps.android.data.kml.KmlPlacemark;
+import com.google.maps.android.data.kml.KmlPolygon;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -115,17 +123,101 @@ public class MapUtils {
                     boundMap(viewOption.isListView(), builder, googleMap);
                 }
                 if (!viewOption.getGeoJsonUrl().equals("") && URLUtil.isValidUrl(viewOption.getGeoJsonUrl())) {
-                    loadGeoJson(viewOption.getGeoJsonUrl(), googleMap, context, viewOption.getEventListener());
+                    loadGeoJson(viewOption.getGeoJsonUrl(), googleMap, context, viewOption.getGeoJsonEventListener());
                 }
                 if (viewOption.getGeoJsonRes() != Integer.MAX_VALUE) {
-                    loadGeoJsonRes(viewOption.getGeoJsonRes(), googleMap, context, viewOption.getEventListener());
+                    loadGeoJsonRes(viewOption.getGeoJsonRes(), googleMap, context, viewOption.getGeoJsonEventListener());
+                }
+                if (!viewOption.getKmlUrl().equals("") && URLUtil.isValidUrl(viewOption.getKmlUrl())) {
+                    loadKML(viewOption.getKmlUrl(), googleMap, context, viewOption.getKmlEventListener());
+                }
+                if (viewOption.getKmlRes() != Integer.MAX_VALUE) {
+                    loadKMLRes(viewOption.getKmlRes(), googleMap, context, viewOption.getKmlEventListener());
                 }
             }
         });
 
     }
 
-    private static void loadGeoJsonRes(int geoJsonRes, GoogleMap googleMap, Context context, onGeoJsonEventListener eventListener) {
+    private static void loadKMLRes(int kmlRes, GoogleMap googleMap, Context context, onKMLEventListener kmlEventListener) {
+        try {
+            KmlLayer kmlLayer = new KmlLayer(googleMap, kmlRes, context);
+            if (kmlEventListener != null)
+                kmlEventListener.onKMLLoaded(kmlLayer);
+            addKMLLayerToMap(kmlLayer, googleMap, context, kmlEventListener);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void loadKML(String kmlUrl, final GoogleMap googleMap, final Context context, final onKMLEventListener kmlEventListener) {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(kmlUrl)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("LoadKMLException:", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String kml = response.body().string();
+                if (!kml.equals("")) {
+                    handleKMLString(kml, googleMap, context, kmlEventListener);
+                }
+            }
+        });
+    }
+
+    private static void handleKMLString(String kml, GoogleMap googleMap, Context context, onKMLEventListener kmlEventListener) {
+        InputStream stream = new ByteArrayInputStream(kml.getBytes());
+        KmlLayer kmlLayer = null;
+        try {
+            kmlLayer = new KmlLayer(googleMap, stream, context);
+            if (kmlEventListener != null)
+                kmlEventListener.onKMLLoaded(kmlLayer);
+            addKMLLayerToMap(kmlLayer, googleMap, context, kmlEventListener);
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private static void addKMLLayerToMap(final KmlLayer kmlLayer, final GoogleMap googleMap, final Context context, final onKMLEventListener kmlEventListener) {
+        Handler mainHandler = new Handler(context.getMainLooper());
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    kmlLayer.addLayerToMap();
+                    kmlLayer.setOnFeatureClickListener(new KmlLayer.OnFeatureClickListener() {
+                        @Override
+                        public void onFeatureClick(Feature feature) {
+                            if (kmlEventListener != null)
+                                kmlEventListener.onFeatureClick(feature);
+                        }
+                    });
+                    moveCameraToKml(kmlLayer, googleMap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+    }
+
+
+    private static void loadGeoJsonRes(int geoJsonRes, GoogleMap googleMap, Context context
+            , onGeoJsonEventListener eventListener) {
         try {
             GeoJsonLayer geoJsonLayer = new GeoJsonLayer(googleMap, geoJsonRes, context);
             addGeoJsonLayerToMap(geoJsonLayer, googleMap, context, eventListener);
@@ -251,4 +343,18 @@ public class MapUtils {
         return patternItems;
     }
 
+    public static void moveCameraToKml(KmlLayer kmlLayer, GoogleMap googleMap) {
+        //TODO fixed error with some kml file
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        KmlContainer container = kmlLayer.getContainers().iterator().next();
+        container = container.getContainers().iterator().next();
+        KmlPlacemark placemark = container.getPlacemarks().iterator().next();
+
+        KmlPolygon polygon = (KmlPolygon) placemark.getGeometry();
+        for (LatLng latLng : polygon.getOuterBoundaryCoordinates()) {
+            builder.include(latLng);
+        }
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 50));
+    }
 }
