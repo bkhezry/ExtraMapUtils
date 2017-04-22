@@ -344,7 +344,8 @@ public class MapUtils {
     }
 
     public static void moveCameraToKml(KmlLayer kmlLayer, GoogleMap googleMap) {
-        //TODO fixed error with some kml file
+        //TODO fixed error with some kml file https://developers.google.com/maps/documentation/android-api/utility/kml
+        //Only use in this kml file correctly.
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         KmlContainer container = kmlLayer.getContainers().iterator().next();
         container = container.getContainers().iterator().next();
