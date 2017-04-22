@@ -3,6 +3,7 @@ package com.github.bkhezry.extramaputils.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.github.bkhezry.extramaputils.onGeoJsonEventListener;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -18,6 +19,10 @@ public class ViewOption implements Parcelable {
     private List<ExtraPolyline> polylines;
     private boolean isListView;
     private StyleDef styleName;
+    private String geoJsonUrl;
+    private int geoJsonRes = Integer.MAX_VALUE;
+    private onGeoJsonEventListener eventListener;
+
 
     public enum StyleDef {
         NIGHT, RETRO, GRAY_SCALE, DEFAULT
@@ -25,7 +30,7 @@ public class ViewOption implements Parcelable {
 
     public ViewOption(String title, LatLng centerCoordinates, boolean forceCenterMap, float mapsZoom,
                       List<ExtraMarker> markers, List<ExtraPolygon> polygons,
-                      List<ExtraPolyline> polylines, boolean isListView, StyleDef styleName) {
+                      List<ExtraPolyline> polylines, boolean isListView, StyleDef styleName, String geoJsonUrl, int geoJsonRes, onGeoJsonEventListener eventListener) {
         this.title = title;
         this.centerLatLng = centerCoordinates;
         this.forceCenterMap = forceCenterMap;
@@ -35,6 +40,9 @@ public class ViewOption implements Parcelable {
         this.polylines = polylines;
         this.isListView = isListView;
         this.styleName = styleName;
+        this.geoJsonUrl = geoJsonUrl;
+        this.geoJsonRes = geoJsonRes;
+        this.eventListener = eventListener;
     }
 
     public LatLng getCenterLatLng() {
@@ -109,6 +117,30 @@ public class ViewOption implements Parcelable {
         this.styleName = styleName;
     }
 
+    public String getGeoJsonUrl() {
+        return geoJsonUrl;
+    }
+
+    public void setGeoJsonUrl(String geoJsonUrl) {
+        this.geoJsonUrl = geoJsonUrl;
+    }
+
+    public int getGeoJsonRes() {
+        return geoJsonRes;
+    }
+
+    public void setGeoJsonRes(int geoJsonRes) {
+        this.geoJsonRes = geoJsonRes;
+    }
+
+    public onGeoJsonEventListener getEventListener() {
+        return eventListener;
+    }
+
+    public void setEventListener(onGeoJsonEventListener eventListener) {
+        this.eventListener = eventListener;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -125,6 +157,8 @@ public class ViewOption implements Parcelable {
         dest.writeTypedList(this.polylines);
         dest.writeByte(this.isListView ? (byte) 1 : (byte) 0);
         dest.writeInt(this.styleName == null ? -1 : this.styleName.ordinal());
+        dest.writeString(this.geoJsonUrl);
+        dest.writeInt(this.geoJsonRes);
     }
 
     protected ViewOption(Parcel in) {
@@ -138,6 +172,8 @@ public class ViewOption implements Parcelable {
         this.isListView = in.readByte() != 0;
         int tmpStyleName = in.readInt();
         this.styleName = tmpStyleName == -1 ? null : StyleDef.values()[tmpStyleName];
+        this.geoJsonUrl = in.readString();
+        this.geoJsonRes = in.readInt();
     }
 
     public static final Creator<ViewOption> CREATOR = new Creator<ViewOption>() {

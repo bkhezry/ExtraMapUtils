@@ -1,5 +1,6 @@
 package com.github.bkhezry.extramaputils.builder;
 
+import com.github.bkhezry.extramaputils.onGeoJsonEventListener;
 import com.github.bkhezry.extramaputils.model.ExtraMarker;
 import com.github.bkhezry.extramaputils.model.ExtraPolygon;
 import com.github.bkhezry.extramaputils.model.ExtraPolyline;
@@ -20,6 +21,9 @@ public class ViewOptionBuilder {
     private List<ExtraPolyline> polylines = new ArrayList<>();
     private boolean isListView = false;
     private ViewOption.StyleDef styleName = ViewOption.StyleDef.DEFAULT;
+    private String geoJsonUrl = "";
+    private int geoJsonRes = Integer.MAX_VALUE;
+    private onGeoJsonEventListener eventListener;
 
     public ViewOptionBuilder withCenterCoordinates(LatLng centerLatLng) {
         this.centerLatLng = centerLatLng;
@@ -73,8 +77,23 @@ public class ViewOptionBuilder {
         return this;
     }
 
+    public ViewOptionBuilder withGeoJson(String geoJsonUrl) {
+        this.geoJsonUrl = geoJsonUrl;
+        return this;
+    }
+
+    public ViewOptionBuilder withGeoJson(int geoJsonRes) {
+        this.geoJsonRes = geoJsonRes;
+        return this;
+    }
+
+    public ViewOptionBuilder withEventListener(onGeoJsonEventListener eventListener) {
+        this.eventListener = eventListener;
+        return this;
+    }
+
     public ViewOption build() {
-        return new ViewOption(title, centerLatLng, forceCenterMap, mapsZoom, markers, polygons, polylines, isListView, styleName);
+        return new ViewOption(title, centerLatLng, forceCenterMap, mapsZoom, markers, polygons, polylines, isListView, styleName, geoJsonUrl, geoJsonRes, eventListener);
     }
 
 
