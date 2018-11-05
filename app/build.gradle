@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
     defaultConfig {
         applicationId "com.github.bkhezry.demoextramaputils"
         minSdkVersion 17
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionCode 120
         versionName "1.2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -19,7 +19,7 @@ android {
     }
 }
 ext {
-    SupportLib = '25.3.0'
+    SupportLib = '28.0.0'
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
