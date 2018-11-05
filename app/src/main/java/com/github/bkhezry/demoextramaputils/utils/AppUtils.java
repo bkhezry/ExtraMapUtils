@@ -3,7 +3,7 @@ package com.github.bkhezry.demoextramaputils.utils;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.annotation.IdRes;
+import androidx.annotation.IdRes;
 import android.text.Html;
 import android.text.Layout;
 import android.text.Spannable;
@@ -201,10 +201,10 @@ public class AppUtils {
                 .build();
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     public static void setTextWithLinks(TextView textView, CharSequence html) {
         textView.setText(html);
         textView.setOnTouchListener(new View.OnTouchListener() {
-            @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 int action = event.getAction();

@@ -1,7 +1,7 @@
 package com.github.bkhezry.extramaputils.builder;
 
 import android.graphics.Color;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.github.bkhezry.extramaputils.model.ExtraPolygon;
 import com.github.bkhezry.extramaputils.model.UiOptions;

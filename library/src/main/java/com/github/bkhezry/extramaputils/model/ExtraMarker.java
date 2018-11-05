@@ -2,7 +2,7 @@ package com.github.bkhezry.extramaputils.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.IdRes;
+import androidx.annotation.IdRes;
 
 import com.google.android.gms.maps.model.LatLng;
 

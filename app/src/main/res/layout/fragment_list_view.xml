@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/list"
-        class="android.support.v4.app.ListFragment"
+        class="androidx.fragment.app.ListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp" />

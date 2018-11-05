@@ -1,7 +1,7 @@
 package com.github.bkhezry.extramaputils.builder;
 
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
 
 import com.github.bkhezry.extramaputils.model.ExtraMarker;
 import com.google.android.gms.maps.model.LatLng;

@@ -1,7 +1,7 @@
 package com.github.bkhezry.demoextramaputils.adapter;
 
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.aspsine.fragmentnavigator.FragmentNavigatorAdapter;
 import com.github.bkhezry.demoextramaputils.ui.fragment.AboutFragment;
