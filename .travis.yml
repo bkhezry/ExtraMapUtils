@@ -4,14 +4,14 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-25.0.2
-    - android-25
-    - extra-android-support
-    - extra-android-m2repository
-    - extra-google-m2repository
-    
+    - build-tools-28.0.3
+    - android-28
   licenses:
     - '.+'
+before_install:
+    - yes | sdkmanager "platforms;android-28"
+    - yes | sdkmanager "build-tools;28.0.3"
+    
 sudo: required
 install: true
 
@@ -19,4 +19,4 @@ before_script:
   - chmod +x gradlew
 
 script:
-  - ./gradlew assembleRelease --stacktrace
+- ./gradlew assembleRelease --stacktrace
