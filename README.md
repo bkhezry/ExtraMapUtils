@@ -8,10 +8,10 @@ ExtraMapUtils is an android library to make working with map markers, polygon an
 
 **Project Setup and Dependencies**
 - JDK 8
-- Android SDK Build tools 25.0.2
+- Android SDK Build tools 28.0.3
 - Supports API Level +17
-- AppCompat & Cardview libraries 25.3.0
-- Google Play Services Maps 10.2.0
+- AppCompat & Cardview libraries of androidx 1.0.0
+- Google Play Services Maps 16.0.0
 
 **Highlights**
 - Provides multiple themea to apply on MapView
@@ -44,7 +44,7 @@ allprojects {
 Add the dependency:
 ```gradle
 dependencies {
-	compile 'com.github.bkhezry:ExtraMapUtils:v1.2.0'
+	compile 'com.github.bkhezry:ExtraMapUtils:1.2.2'
 }
 ```
 
