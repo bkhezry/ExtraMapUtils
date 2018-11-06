@@ -44,7 +44,7 @@ allprojects {
 Add the dependency:
 ```gradle
 dependencies {
-	compile 'com.github.bkhezry:ExtraMapUtils:1.2.2'
+	implementation 'com.github.bkhezry:ExtraMapUtils:1.2.2'
 }
 ```
 
